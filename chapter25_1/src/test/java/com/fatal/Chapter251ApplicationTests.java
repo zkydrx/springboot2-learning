@@ -11,7 +11,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Chapter251ApplicationTests {
+public class Chapter251ApplicationTests
+{
 
     @Autowired
     private IProductService productService;
@@ -21,7 +22,8 @@ public class Chapter251ApplicationTests {
      * 执行结果：抛异常 java.lang.RuntimeException: operation not allow
      */
     @Test
-    public void insert() {
+    public void insert()
+    {
         CurrentUserHolder.set("tom");
         productService.insert(new Product().setId(1l).setName("product"));
     }
@@ -31,7 +33,8 @@ public class Chapter251ApplicationTests {
      * 执行结果：正常删除
      */
     @Test
-    public void delete() {
+    public void delete()
+    {
         CurrentUserHolder.set("admin");
         productService.delete(1l);
     }

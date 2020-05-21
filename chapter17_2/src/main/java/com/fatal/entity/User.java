@@ -10,6 +10,7 @@ import java.io.Serializable;
 
 /**
  * User 实体
+ *
  * @author: Fatal
  * @date: 2018/10/16 0016 14:08
  */
@@ -17,7 +18,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @ApiModel
-public class User implements Serializable {
+public class User implements Serializable
+{
 
     private Long id;
     @ApiModelProperty("用户名")

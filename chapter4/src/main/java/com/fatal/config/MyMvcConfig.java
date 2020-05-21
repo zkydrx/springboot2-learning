@@ -12,10 +12,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @date: 2018/9/28 0028 21:54
  */
 @Configuration
-public class MyMvcConfig implements WebMvcConfigurer {
+public class MyMvcConfig implements WebMvcConfigurer
+{
 
     @Bean
-    public LocaleResolver localeResolver() {
+    public LocaleResolver localeResolver()
+    {
         return new MyLocaleResolver();
     }
 
@@ -23,7 +25,8 @@ public class MyMvcConfig implements WebMvcConfigurer {
      * 添加视图控制器
      */
     @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
+    public void addViewControllers(ViewControllerRegistry registry)
+    {
         // `映射路径`会去模板中找对应的`视图`
         registry.addViewController("/test2").setViewName("test2");
     }

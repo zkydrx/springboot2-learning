@@ -18,7 +18,8 @@ import java.util.Date;
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class ProductDaoTest {
+public class ProductDaoTest
+{
 
     @Autowired
     private ProductDao dao;
@@ -26,19 +27,16 @@ public class ProductDaoTest {
     Product product;
 
     @Before
-    public void before() {
-        product = new Product().setName("童年·在人间·我的大学")
-                .setCategory("书")
-                .setProvider("fatal")
-                .setBuyPrice(3333)
-                .setSellPrice(4444)
-                .setUpdateTime(new Date());
+    public void before()
+    {
+        product = new Product().setName("童年·在人间·我的大学").setCategory("书").setProvider("fatal").setBuyPrice(3333).setSellPrice(4444).setUpdateTime(new Date());
     }
 
     @Test
-    public void save() {
+    public void save()
+    {
         Product save = dao.save(product);
-        System.out.println("【Product新增成功】 -- [Product = " +  save +"]");
+        System.out.println("【Product新增成功】 -- [Product = " + save + "]");
     }
 
 

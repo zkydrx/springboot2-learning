@@ -12,17 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/topic")
-public class TopicController {
+public class TopicController
+{
 
     private TopicSender sender;
 
     @Autowired
-    public TopicController(TopicSender sender) {
+    public TopicController(TopicSender sender)
+    {
         this.sender = sender;
     }
 
     @GetMapping
-    public void send() {
+    public void send()
+    {
         sender.send();
     }
 

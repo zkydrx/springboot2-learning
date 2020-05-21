@@ -4,7 +4,7 @@ spring:
     # 基本属性
     url: jdbc:mysql://localhost:3306/chapter29?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=UTC&useSSL=false
     username: root
-    password: 123456
+    password: root
   jpa:
     # 显示 sql
     show-sql: true
@@ -17,10 +17,11 @@ spring:
     database-platform: org.hibernate.dialect.MySQL57InnoDBDialect
 
   redis:
-    host: localhost
+    host: 47.97.80.27
+    port: 6666
     password: 123456
     # Redis默认情况下有16个分片，这里配置具体使用的分片，默认是0
-    database: 2
+    database: 10
     lettuce:
       pool:
         # 当池耗尽时，在引发异常之前连接分配可以阻塞的最长时间（使用负值表示没有限制） 默认 -1
@@ -36,3 +37,14 @@ spring:
     # 一般来说是不用配置的，Spring Cache 会根据依赖的包自行装配
   cache:
     type: redis
+
+swagger:
+  title: google科技技术文档
+  description: google科技接口文档
+  version: 1.0
+  terms-of-service-url: https://www.google.com
+  base-package: com.fatal.controller
+  contact:
+    name: admin
+    url: https://www.google.com
+    email: admin@google.com

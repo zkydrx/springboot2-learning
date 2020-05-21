@@ -16,7 +16,8 @@ import java.util.Map;
  * @date: 2018/9/20 0020 16:21
  */
 @RestController
-public class FatalController {
+public class FatalController
+{
 
     @Autowired
     private Fatal1 fatal1;
@@ -34,9 +35,10 @@ public class FatalController {
      * 测试 @Value
      */
     @RequestMapping("/getPropertyValue1")
-    public Map<String, Object> showComponentProperty1() {
+    public Map<String, Object> showComponentProperty1()
+    {
         Map<String, Object> map = new HashMap<>();
-        map.put("注解","@Value");
+        map.put("注解", "@Value");
         map.put("name", fatal1.getName());
         map.put("age", fatal1.getAge());
         return map;
@@ -46,9 +48,10 @@ public class FatalController {
      * 测试 @ConfigurationProperties
      */
     @RequestMapping("/getPropertyValue2")
-    public Map<String, Object> showComponentProperty2() {
+    public Map<String, Object> showComponentProperty2()
+    {
         Map<String, Object> map = new HashMap<>();
-        map.put("注解","@ConfigurationProperties");
+        map.put("注解", "@ConfigurationProperties");
         map.put("name", fatal2.getName());
         map.put("age", fatal2.getAge());
         // 对象
@@ -68,9 +71,10 @@ public class FatalController {
      * 测试 @ConfigurationProperties + @Validated
      */
     @RequestMapping("/getPropertyValue3")
-    public Map<String, Object> showComponentPropertyWithValidated() {
+    public Map<String, Object> showComponentPropertyWithValidated()
+    {
         Map<String, Object> map = new HashMap<>();
-        map.put("注解","@ConfigurationProperties + @Validated");
+        map.put("注解", "@ConfigurationProperties + @Validated");
         map.put("name", fatal3.getName());
         map.put("age", fatal3.getAge());
         map.put("email", fatal3.getEmail());
@@ -81,9 +85,10 @@ public class FatalController {
      * 测试 @PropertySource
      */
     @RequestMapping("/getPropertyValue4")
-    public Map<String, Object> showComponentProperty3() {
+    public Map<String, Object> showComponentProperty3()
+    {
         Map<String, Object> map = new HashMap<>();
-        map.put("注解","@PropertySource");
+        map.put("注解", "@PropertySource");
         map.put("name", fatal4.getName());
         map.put("age", fatal4.getAge());
         return map;

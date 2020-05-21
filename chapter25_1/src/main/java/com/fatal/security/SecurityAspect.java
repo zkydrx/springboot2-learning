@@ -9,29 +9,35 @@ import org.springframework.util.StringUtils;
 
 /**
  * 切面
+ *
  * @author: Fatal
  * @date: 2018/11/8 0008 11:35
  */
 @Aspect     // 标注该类是切面类
 @Component
-public class SecurityAspect {
+public class SecurityAspect
+{
 
     /**
      * 切点
      * 注意：如果注解和切面不在同一个包，记得要用全类名
      */
     @Pointcut("@annotation(AdminOnly)")
-    public void adminOnly() {
+    public void adminOnly()
+    {
     }
 
     /**
      * 前置通知
      */
     @Before("adminOnly()")
-    public void check() {
+    public void check()
+    {
         String user = CurrentUserHolder.get();
-        if (!StringUtils.isEmpty(user)) {
-            if (!"admin".equals(user)) {
+        if (!StringUtils.isEmpty(user))
+        {
+            if (!"admin".equals(user))
+            {
                 throw new RuntimeException("operation not allow");
             }
         }

@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 /**
  * User 实体
+ *
  * @author: Fatal
  * @date: 2018/10/13 0013 14:47
  */
@@ -16,7 +17,8 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor  // 反序列化需要无参构造器
-public class User implements Serializable {
+public class User implements Serializable
+{
 
     private Long id;
     private String username;

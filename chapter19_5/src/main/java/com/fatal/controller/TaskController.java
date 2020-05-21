@@ -20,18 +20,16 @@ import java.util.Date;
 @Slf4j
 @RestController
 @RequestMapping("/task")
-public class TaskController {
+public class TaskController
+{
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
     @GetMapping
-    public void task() {
-        User user = new User()
-                .setUsername("fatal")
-                .setPassword("123456")
-                .setBirthday(new Date())
-                .setId(1L);
+    public void task()
+    {
+        User user = new User().setUsername("fatal").setPassword("123456").setBirthday(new Date()).setId(1L);
         log.info("[Task 发送时间] - [{}]", LocalDateTime.now());
         rabbitTemplate.convertAndSend(RabbitMQConfig.TASK_EXCHANGE, RabbitMQConfig.TASK_ROUTING_KEY, user, message -> {
             /**

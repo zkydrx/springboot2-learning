@@ -17,36 +17,41 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Slf4j
-public class Chapter6ApplicationTests {
+public class Chapter6ApplicationTests
+{
 
     @Autowired
     private UserRepository repository;
 
     @Test
-    public void save() {
+    public void save()
+    {
         User user = new User().setUsername("米彩").setPassword("123").setEmail("123@qq.com");
         repository.save(user);
-        log.info("[添加成功] - [{}]",user);
+        log.info("[添加成功] - [{}]", user);
     }
 
     @Test
-    public void findAll() {
+    public void findAll()
+    {
         List<User> list = repository.findAll();
         log.info("[查询所有] - [{}]", list);
     }
 
     @Test
-    public void findOne() {
+    public void findOne()
+    {
         User user = new User().setUsername("张三");
         User one = repository.findOne(Example.of(user)).orElse(null);
-        log.info("[根据用户名查询成功] - [{}]", one==null?"无记录":one);
+        log.info("[根据用户名查询成功] - [{}]", one == null ? "无记录" : one);
     }
 
     /**
      * 测试分页查询
      */
     @Test
-    public void findPage() {
+    public void findPage()
+    {
         Pageable pageable = PageRequest.of(0, 5, Sort.by(Sort.Order.asc("username")));
         Page<User> page = repository.findAll(pageable);
         log.info("[分页+排序+查询所有] - [{}]", page.getContent());
@@ -56,7 +61,8 @@ public class Chapter6ApplicationTests {
      * 测试分页查询（内容替换）
      */
     @Test
-    public void findPageWithConvertContent() {
+    public void findPageWithConvertContent()
+    {
         Pageable pageable = PageRequest.of(0, 5, Sort.by(Sort.Order.asc("username")));
         Page<User> page = repository.findAll(pageable);
         // 内容转为DTO
@@ -68,7 +74,8 @@ public class Chapter6ApplicationTests {
      * 测试自定义分页查询sql
      */
     @Test
-    public void findPageWithCustomSql() {
+    public void findPageWithCustomSql()
+    {
         Pageable pageable = PageRequest.of(0, 1, Sort.by(Sort.Order.asc("id")));
         Page<User> page = repository.findPage(pageable);
         log.info("[分页+排序+查询所有（自定义分页查询sql）] - [{}]", page.getContent());
@@ -78,7 +85,8 @@ public class Chapter6ApplicationTests {
      * 测试动态拼装sql加模糊查询
      */
     @Test
-    public void findPageWithLike() {
+    public void findPageWithLike()
+    {
         Pageable pageable = PageRequest.of(0, 5, Sort.by(Sort.Order.asc("id")));
         String username1 = "米";
         String username2 = "";

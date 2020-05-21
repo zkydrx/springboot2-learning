@@ -8,12 +8,14 @@ import org.springframework.stereotype.Component;
 
 /**
  * 测试`Advice`的切面
+ *
  * @author: Fatal
  * @date: 2018/11/11 0011 20:39
  */
 @Aspect
 @Component
-public class AdviceAspectConfig {
+public class AdviceAspectConfig
+{
 
     /*// =========================    after    =========================
 
@@ -51,24 +53,32 @@ public class AdviceAspectConfig {
     // =========================    around    =========================
 
     @Pointcut("execution(public * com.fatal.service..*Service.*(..))")
-    public void aroundPoint() {}
+    public void aroundPoint()
+    {
+    }
 
     /**
      * @param joinPoint:获取当前执行的方法
      */
     @Around("aroundPoint()")
-    public Object around(ProceedingJoinPoint joinPoint) {
+    public Object around(ProceedingJoinPoint joinPoint)
+    {
         Object result = null;
         System.out.println("======  before  ======");
-        try {
+        try
+        {
             // 获得返回值
             result = joinPoint.proceed(joinPoint.getArgs());
             System.out.println("方法返回值为：" + result);
             System.out.println("======  afterReturning  ======");
-        } catch (Throwable throwable) {
+        }
+        catch (Throwable throwable)
+        {
             throwable.printStackTrace();
             System.out.println("======  afterThrowing  ======");
-        } finally {
+        }
+        finally
+        {
             System.out.println("======  after  ======");
         }
         System.out.println();

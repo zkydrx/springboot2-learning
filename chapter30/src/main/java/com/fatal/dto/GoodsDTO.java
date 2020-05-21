@@ -13,10 +13,12 @@ import org.springframework.beans.BeanUtils;
  */
 @Data
 @Accessors(chain = true)
-public class GoodsDTO {
+public class GoodsDTO
+{
 
     /**
      * 商品ID
+     *
      * @desc ID_WORKER: 分布式全局唯一ID 长整型类型
      */
     @TableId(type = IdType.ID_WORKER)
@@ -62,7 +64,8 @@ public class GoodsDTO {
      */
     private Integer status;
 
-    public static GoodsDTO of(Goods goods) {
+    public static GoodsDTO of(Goods goods)
+    {
         GoodsDTO dto = new GoodsDTO();
         BeanUtils.copyProperties(goods, dto);
         return dto;

@@ -4,10 +4,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 业务服务
+ *
  * @author Fatal
  * @date 2019/8/24 0024 20:22
  */
-public interface IBusinessService {
+public interface IBusinessService
+{
 
     /**
      * 无锁业务
@@ -21,12 +23,14 @@ public interface IBusinessService {
 
     /**
      * 获取库存
+     *
      * @return
      */
     AtomicInteger getStock();
 
     /**
      * 补充库存
+     *
      * @param increment
      */
     Integer supplyStock(Integer increment);

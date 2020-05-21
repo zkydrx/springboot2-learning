@@ -15,20 +15,21 @@ import javax.validation.constraints.NotBlank;
 
 /**
  * 数据验证控制层
+ *
  * @author: Fatal
  * @date: 2018/11/27 0027 17:10
  */
 @Validated // 开启属性参数验证
 @RestController
-public class ValidatorController {
+public class ValidatorController
+{
 
     /**
      * 测试属性参数验证
      */
     @GetMapping("/test1")
-    public String test1(@NotBlank(message = "name 不能为空")
-                            @Length(min = 2, max = 10, message = "name 长度必须在 {min} - {max} 之间")
-                                    String name) {
+    public String test1(@NotBlank(message = "name 不能为空") @Length(min = 2, max = 10, message = "name 长度必须在 {min} - {max} 之间") String name)
+    {
         /**
          * @Validated 标注在类上与 @Length... 这些注解一起校验方法参数时。
          * 这时候`BindingResult`不能起作用，
@@ -48,8 +49,10 @@ public class ValidatorController {
      * 测试对象参数验证和嵌套验证
      */
     @PostMapping(value = "/test2", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public String test2(@Valid @RequestBody Book book, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+    public String test2(@Valid @RequestBody Book book, BindingResult bindingResult)
+    {
+        if (bindingResult.hasErrors())
+        {
             return bindingResult.getFieldError().getDefaultMessage();
         }
         return "success";

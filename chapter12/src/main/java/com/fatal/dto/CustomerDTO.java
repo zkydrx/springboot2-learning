@@ -8,11 +8,13 @@ import java.util.Date;
 
 /**
  * Customer 数据传输对象
+ *
  * @author Fatal
  * @date 2019/8/9 0009 10:10
  */
 @Data
-public class CustomerDTO {
+public class CustomerDTO
+{
 
     private String id;
 
@@ -24,7 +26,8 @@ public class CustomerDTO {
 
     private String hobby;
 
-    public static CustomerDTO of(Customer customer) {
+    public static CustomerDTO of(Customer customer)
+    {
         CustomerDTO customerDTO = new CustomerDTO();
         BeanUtils.copyProperties(customer, customerDTO);
         return customerDTO;

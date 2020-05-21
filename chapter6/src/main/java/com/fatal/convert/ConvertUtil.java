@@ -6,12 +6,15 @@ import org.springframework.beans.BeanUtils;
 
 /**
  * 数据传输对象转换工具类
+ *
  * @author: Fatal
  * @date: 2019/6/26 0026 11:39
  */
-public class ConvertUtil {
+public class ConvertUtil
+{
 
-    public static UserDTO convert(User user) {
+    public static UserDTO convert(User user)
+    {
         UserDTO dto = new UserDTO();
         BeanUtils.copyProperties(user, dto);
         return dto;

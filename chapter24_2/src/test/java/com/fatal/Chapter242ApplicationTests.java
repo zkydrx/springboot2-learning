@@ -16,7 +16,8 @@ import java.util.concurrent.TimeoutException;
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Chapter242ApplicationTests {
+public class Chapter242ApplicationTests
+{
 
     @Autowired
     private Task task;
@@ -25,16 +26,19 @@ public class Chapter242ApplicationTests {
      * 测试使用自定义异步线程池
      */
     @Test
-    public void testPool() throws Exception {
+    public void testPool() throws Exception
+    {
 
         Future<String> taskOne = task.doTaskOne();
         Future<String> taskTwo = task.doTaskTwo();
         Future<String> taskThree = task.doTaskThree();
 
         long start = System.currentTimeMillis();
-        while (true) {
+        while (true)
+        {
             // 判断异步方法是否执行完成
-            if (taskOne.isDone() && taskTwo.isDone() && taskThree.isDone()) {
+            if (taskOne.isDone() && taskTwo.isDone() && taskThree.isDone())
+            {
                 break;
             }
         }
@@ -48,7 +52,8 @@ public class Chapter242ApplicationTests {
      * 测试异常处理类
      */
     @Test
-    public void testAsyncExceptionReturnVoid() {
+    public void testAsyncExceptionReturnVoid()
+    {
         task.asyncReturnVoidWithException("testAsyncExceptionReturnVoid");
     }
 
@@ -56,8 +61,8 @@ public class Chapter242ApplicationTests {
      * 测试Future<String>处理异常
      */
     @Test
-    public void testAsyncExceptionReturnFuture() throws InterruptedException,
-            ExecutionException, TimeoutException {
+    public void testAsyncExceptionReturnFuture() throws InterruptedException, ExecutionException, TimeoutException
+    {
         Future<String> future = task.asyncReturnFutureWithException("testAsyncExceptionReturnFuture");
         /**
          * V get(long timeout, TimeUnit unit)

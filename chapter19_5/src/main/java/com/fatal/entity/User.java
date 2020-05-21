@@ -16,7 +16,8 @@ import java.util.Date;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements Serializable {
+public class User implements Serializable
+{
 
     private Long id;
     private String username;

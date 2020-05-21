@@ -9,7 +9,8 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class ParamDTO {
+public class ParamDTO
+{
 
     private Long id;
 

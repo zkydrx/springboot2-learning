@@ -14,26 +14,30 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class UserMapperTest {
+public class UserMapperTest
+{
 
     @Autowired
     private UserMapper mapper;
 
     @Test
-    public void deleteByPrimaryKey() {
+    public void deleteByPrimaryKey()
+    {
         int record = mapper.deleteByPrimaryKey(1001);
         Assert.assertNotEquals(0, record);
     }
 
     @Test
-    public void insert() {
+    public void insert()
+    {
         User user = new User().setUsername("米彩").setPassword("123").setPhone("123");
         int record = mapper.insert(user);
         Assert.assertNotEquals(0, record);
     }
 
     @Test
-    public void insertSelective() {
+    public void insertSelective()
+    {
         User user = new User().setUsername("米彩").setPassword("123");
         int record = mapper.insert(user);
         Assert.assertNotEquals(0, record);
@@ -43,7 +47,8 @@ public class UserMapperTest {
      * select id, username, password, phone from user where id = ?
      */
     @Test
-    public void selectByPrimaryKey() {
+    public void selectByPrimaryKey()
+    {
         User user = mapper.selectByPrimaryKey(1000);
         Assert.assertNotEquals(null, user);
     }
@@ -53,7 +58,8 @@ public class UserMapperTest {
      * Parameters: 米彩的姐姐(String), 123(String), 1000(Integer)
      */
     @Test
-    public void updateByPrimaryKeySelective() {
+    public void updateByPrimaryKeySelective()
+    {
         User user = new User().setId(1000).setUsername("米彩的姐姐").setPassword("123");
         int record = mapper.updateByPrimaryKeySelective(user);
         Assert.assertNotEquals(0, record);
@@ -64,7 +70,8 @@ public class UserMapperTest {
      * Parameters: 米彩的姐姐(String), 123(String), null, 1000(Integer)
      */
     @Test
-    public void updateByPrimaryKey() {
+    public void updateByPrimaryKey()
+    {
         User user = new User().setId(1000).setUsername("米彩的姐姐").setPassword("123");
         int record = mapper.updateByPrimaryKey(user);
         Assert.assertNotEquals(0, record);

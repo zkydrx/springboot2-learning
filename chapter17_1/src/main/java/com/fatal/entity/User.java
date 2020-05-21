@@ -9,6 +9,7 @@ import lombok.experimental.Accessors;
 
 /**
  * User 实体
+ *
  * @author: Fatal
  * @date: 2018/10/17 0017 15:05
  */
@@ -17,7 +18,8 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @ApiModel
 @Accessors(chain = true)
-public class User {
+public class User
+{
 
     private Long id;
     @ApiModelProperty(name = "username", value = "用户名")

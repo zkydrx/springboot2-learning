@@ -10,19 +10,22 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Book 实体
+ *
  * @author: Fatal
  * @date: 2018/11/28 0028 15:23
  */
 @Data
-public class Book {
+public class Book
+{
 
     @NotNull(message = "id 不能为空", groups = Groups.Update.class)
     private Long id;
 
     /**
      * 纸的质量
+     *
      * @desc 更新的时候可以填充，要么不填（可以为null），要填就不能为空（空串）
-     *      更新的属性中，很多需要这么校验，可以为 null，但不能为空
+     * 更新的属性中，很多需要这么校验，可以为 null，但不能为空
      */
     @Length(min = 1, message = "paperQuality 不能为空", groups = Groups.Update.class)
     @NotBlank(message = "paperQuality 不能为空", groups = Groups.Other.class)

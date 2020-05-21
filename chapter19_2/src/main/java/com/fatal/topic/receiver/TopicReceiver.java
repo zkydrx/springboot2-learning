@@ -14,17 +14,21 @@ import java.time.LocalDateTime;
 
 /**
  * 接收者
+ *
  * @author: Fatal
  * @date: 2018/10/22 0022 15:09
  */
 @Slf4j
 @Component
 @RabbitListener(queues = TopicRabbitMQConfig.TOPIC_QUEUE)
-public class TopicReceiver {
+public class TopicReceiver
+{
 
     @RabbitHandler
-    public void receiveMessage(User user, Message message, Channel channel) {
-        try {
+    public void receiveMessage(User user, Message message, Channel channel)
+    {
+        try
+        {
             log.info("【接收的User信息】--[{}]", user);
             /**
              * @method void basicAck(long deliveryTag, boolean multiple) throws IOException
@@ -34,10 +38,14 @@ public class TopicReceiver {
              *      false: 仅确认提供的传递标签指向的那条消息
              */
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             // TODO Ack失败的后续处理
             log.error("【Ack失败】 time = {}", LocalDateTime.now());
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             // TODO 业务异常的后续处理
             log.error("【消费失败，业务异常】 time = {}", LocalDateTime.now());
         }

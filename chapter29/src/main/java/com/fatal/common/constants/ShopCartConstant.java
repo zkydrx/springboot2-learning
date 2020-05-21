@@ -2,10 +2,12 @@ package com.fatal.common.constants;
 
 /**
  * 购物车常量
+ *
  * @author Fatal
  * @date 2019/8/15 0015 8:16
  */
-public interface ShopCartConstant {
+public interface ShopCartConstant
+{
 
     /**
      * 购物车key前缀
@@ -40,19 +42,22 @@ public interface ShopCartConstant {
     /**
      * 购物车每页显示条数
      */
-//    Integer PAGE_SIZE = 16;
+    //    Integer PAGE_SIZE = 16;
     Integer PAGE_SIZE = 4;
 
     /**
      * 为购物车加上前缀
+     *
      * @param userId
      * @return
      */
-    static String getCartKey(Long userId) {
+    static String getCartKey(Long userId)
+    {
         return String.format(ShopCartConstant.SHOP_CART, userId);
     }
 
-    static String getGroupingKey(Long userId) {
+    static String getGroupingKey(Long userId)
+    {
         return String.format(ShopCartConstant.SHOP_CART_FOR_GROUPING, userId);
     }
 

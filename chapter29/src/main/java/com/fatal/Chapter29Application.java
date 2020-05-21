@@ -8,9 +8,11 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableCaching // 启用缓存
 @SpringBootApplication
 @EnableAspectJAutoProxy(exposeProxy = true) // 暴露代理
-public class Chapter29Application {
+public class Chapter29Application
+{
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         SpringApplication.run(Chapter29Application.class, args);
     }
 

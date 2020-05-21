@@ -10,15 +10,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Chapter32ApplicationTests {
+public class Chapter32ApplicationTests
+{
 
     @Autowired
     private ElasticsearchTemplate template;
 
     @Test
-    public void contextLoads() {
+    public void contextLoads()
+    {
         boolean isCreate = template.createIndex(City.class);
-        if (isCreate) {
+        if (isCreate)
+        {
             System.out.println("city create success");
         }
     }

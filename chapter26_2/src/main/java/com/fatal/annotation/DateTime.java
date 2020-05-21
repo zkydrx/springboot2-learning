@@ -12,13 +12,15 @@ import java.lang.annotation.Target;
 /**
  * 自定义注解：校验 Date 类型的格式
  * 最后两个属性时必须要的。否则会报错
+ *
  * @author: Fatal
  * @date: 2018/11/28 0028 11:40
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.FIELD, ElementType.PARAMETER}) // 属性和参数上可以使用
-@Constraint(validatedBy = DateTimeValidator.class)	// 指定该注解的校验器
-public @interface DateTime {
+@Constraint(validatedBy = DateTimeValidator.class)    // 指定该注解的校验器
+public @interface DateTime
+{
 
     /**
      * 错误消息  - 关键字段

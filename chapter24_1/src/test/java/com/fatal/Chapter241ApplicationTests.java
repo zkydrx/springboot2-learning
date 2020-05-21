@@ -13,20 +13,24 @@ import java.util.concurrent.Future;
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Chapter241ApplicationTests {
+public class Chapter241ApplicationTests
+{
 
     @Autowired
     private Task task;
 
     @Test
-    public void contextLoads() throws Exception {
+    public void contextLoads() throws Exception
+    {
         Future<String> taskOne = task.doTaskOne();
         Future<String> taskTwo = task.doTaskTwo();
         Future<String> taskThree = task.doTaskThree();
         long start = System.currentTimeMillis();
-        while (true) {
+        while (true)
+        {
             // 判断异步方法是否执行完成
-            if (taskOne.isDone() && taskTwo.isDone() && taskThree.isDone()) {
+            if (taskOne.isDone() && taskTwo.isDone() && taskThree.isDone())
+            {
                 break;
             }
         }

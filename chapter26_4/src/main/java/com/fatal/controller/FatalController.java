@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2019/8/12 0012 10:50
  */
 @RestController
-public class FatalController {
+public class FatalController
+{
 
     @PostMapping
-    public String combination(@Validated Book book, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+    public String combination(@Validated Book book, BindingResult bindingResult)
+    {
+        if (bindingResult.hasErrors())
+        {
             return bindingResult.getFieldError().getDefaultMessage();
         }
         return "success";

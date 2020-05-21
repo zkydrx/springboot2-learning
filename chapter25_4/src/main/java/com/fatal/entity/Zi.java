@@ -9,7 +9,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Zi extends Fu {
+public class Zi extends Fu
+{
 
     public String publicZi;
 

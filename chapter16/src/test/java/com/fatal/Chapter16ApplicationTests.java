@@ -17,7 +17,8 @@ import java.util.List;
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Chapter16ApplicationTests {
+public class Chapter16ApplicationTests
+{
 
     @Autowired
     private IUserService userService;
@@ -26,7 +27,8 @@ public class Chapter16ApplicationTests {
     private CacheManager cacheManager;
 
     @Test
-    public void testCache() {
+    public void testCache()
+    {
         /**
          * 测试查询（有缓存，没有显示进入【selectById】方法）
          */
@@ -36,8 +38,7 @@ public class Chapter16ApplicationTests {
         /**
          * 测试更新
          */
-        search.setUsername("fatal")
-                .setUpdateTime(LocalDateTime.now());
+        search.setUsername("fatal").setUpdateTime(LocalDateTime.now());
         User update = userService.update(search);
         log.info("【更新成功】 = [{}]", update);
 
@@ -55,16 +56,16 @@ public class Chapter16ApplicationTests {
     }
 
     @Test
-    public void testListUser() {
+    public void testListUser()
+    {
         List<User> users = userService.listUser();
         log.info("【查询成功】 = [{}]", users);
     }
 
     @Test
-    public void testListUserWithParam() {
-        ParamDTO paramDTO = new ParamDTO()
-                .setId(1L)
-                .setUsername("米彩");
+    public void testListUserWithParam()
+    {
+        ParamDTO paramDTO = new ParamDTO().setId(1L).setUsername("米彩");
         /*ParamDTO paramDTO = new ParamDTO()
                 .setId(2L)
                 .setUsername("米琪");*/
@@ -73,13 +74,15 @@ public class Chapter16ApplicationTests {
     }
 
     @Test
-    public void testSelectById() {
+    public void testSelectById()
+    {
         User search = userService.selectById(1L);
         log.info("【查询成功】 = [{}]", search);
     }
 
     @Test
-    public void testRemove() {
+    public void testRemove()
+    {
         User remove = userService.remove(1L);
         log.info("【删除成功】 = [{}]", remove);
     }
@@ -89,7 +92,8 @@ public class Chapter16ApplicationTests {
      * 测试低流量情况下更新数据缓存与数据库双写一致性问题
      */
     @Test
-    public void testLowFlowRateWithUpdate() {
+    public void testLowFlowRateWithUpdate()
+    {
         User search = userService.selectById(1L);
         search.setPassword("123456");
         userService.lowFlowRateWithUpdate(search);
@@ -100,7 +104,8 @@ public class Chapter16ApplicationTests {
      * 测试高并发情况下更新数据缓存与数据库双写一致性问题
      */
     @Test
-    public void testHighConcurrencyWithUpdate() {
+    public void testHighConcurrencyWithUpdate()
+    {
         User search = userService.selectById(1L);
         search.setPassword("123456");
         userService.highConcurrencyWithUpdate(search);
@@ -111,7 +116,8 @@ public class Chapter16ApplicationTests {
      * 测试缓存管理器
      */
     @Test
-    public void testCacheManager() {
+    public void testCacheManager()
+    {
         System.out.println(cacheManager);
     }
 

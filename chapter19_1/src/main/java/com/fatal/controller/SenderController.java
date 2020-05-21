@@ -12,17 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/send")
-public class SenderController {
+public class SenderController
+{
 
     private FatalSender sender;
 
     @Autowired
-    public SenderController(FatalSender sender) {
+    public SenderController(FatalSender sender)
+    {
         this.sender = sender;
     }
 
     @GetMapping
-    public void send() {
+    public void send()
+    {
         // 发布消息
         sender.send();
     }

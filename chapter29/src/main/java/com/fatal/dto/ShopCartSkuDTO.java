@@ -8,14 +8,16 @@ import org.springframework.beans.BeanUtils;
 
 /**
  * 购物车skuDTO，包含了购物车需要显示的所有数据
- * @desc @EqualsAndHashCode 这里只选择了两个属性，是为了后面去重；先去重后map，可以减少大部分操作。
+ *
  * @author Fatal
+ * @desc @EqualsAndHashCode 这里只选择了两个属性，是为了后面去重；先去重后map，可以减少大部分操作。
  * @date 2019/8/15 0015 17:45
  */
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(of = {"shopId", "shopName"})
-public class ShopCartSkuDTO {
+public class ShopCartSkuDTO
+{
 
     private Long id;
 
@@ -74,7 +76,8 @@ public class ShopCartSkuDTO {
      */
     private Integer status;
 
-    public static ShopCartSkuDTO of(Sku sku) {
+    public static ShopCartSkuDTO of(Sku sku)
+    {
         ShopCartSkuDTO dto = new ShopCartSkuDTO();
         BeanUtils.copyProperties(sku, dto);
         return dto;

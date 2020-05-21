@@ -7,7 +7,8 @@ import lombok.Getter;
  * @date 2019/8/9 0009 9:35
  */
 @Getter
-public enum OperationEnum {
+public enum OperationEnum
+{
 
     /**
      * 成功
@@ -23,7 +24,8 @@ public enum OperationEnum {
 
     private String message;
 
-    OperationEnum(String code, String message) {
+    OperationEnum(String code, String message)
+    {
         this.code = code;
         this.message = message;
     }

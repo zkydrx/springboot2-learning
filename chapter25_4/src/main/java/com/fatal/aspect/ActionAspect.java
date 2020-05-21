@@ -23,33 +23,48 @@ import java.util.List;
  */
 @Aspect
 @Component
-public class ActionAspect {
+public class ActionAspect
+{
 
-    /** 实体id */
+    /**
+     * 实体id
+     */
     private final String ID = "id";
-    /** 保存、更新的方法名 */
+    /**
+     * 保存、更新的方法名
+     */
     private final String SAVE = "save";
-    /** 删除的方法名 */
+    /**
+     * 删除的方法名
+     */
     private final String DELETE = "deleteById";
-    /** 操作者 */
+    /**
+     * 操作者
+     */
     private final String ADMIN = "admin";
 
     @Autowired
     private ActionDao dao;
 
     @Pointcut("execution(public * com.fatal.dao.ProductDao.save*(..))")
-    public void save() {}
+    public void save()
+    {
+    }
 
     @Pointcut("execution(public * com.fatal.dao.ProductDao.delete*(..))")
-    public void delete() {}
+    public void delete()
+    {
+    }
 
     /**
      * 1、判断操作的类型 -- 增加、删除或者更新（增加和更新通过id区分）
      * 2、获取ChangeItem
+     *
      * @return
      */
     @Around("save() || delete()")
-    public Object addOperateLog(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object addOperateLog(ProceedingJoinPoint joinPoint) throws Throwable
+    {
 
         Action action = new Action();
         ActionType actionType = null;
@@ -60,25 +75,35 @@ public class ActionAspect {
         Object joinPointArg = joinPoint.getArgs()[0];
 
         Long id = null;
-        if (method.contains(DELETE)) {
+        if (method.contains(DELETE))
+        {
             id = (Long) joinPointArg;
-        } else {
+        }
+        else
+        {
             // 先判断有没有id
             Object property = PropertyUtils.getProperty(joinPointArg, ID);
-            if (!ObjectUtils.isEmpty(property)) {
+            if (!ObjectUtils.isEmpty(property))
+            {
                 id = Long.valueOf(property.toString());
             }
         }
 
-        if (ObjectUtils.isEmpty(id)) {
+        if (ObjectUtils.isEmpty(id))
+        {
             // 新增
             actionType = ActionType.INSERT;
             action.setObjectClass(joinPointArg.getClass().getName());
-        } else {
-            if (method.contains(SAVE)) {
+        }
+        else
+        {
+            if (method.contains(SAVE))
+            {
                 // 更新
                 actionType = ActionType.UPDATE;
-            } else if (method.contains(DELETE)) {
+            }
+            else if (method.contains(DELETE))
+            {
                 // 删除
                 actionType = ActionType.DELETE;
             }
@@ -92,18 +117,24 @@ public class ActionAspect {
         Object result = joinPoint.proceed(joinPoint.getArgs());
         // =========           end          =========
 
-        if (ObjectUtils.isEmpty(id)) {
+        if (ObjectUtils.isEmpty(id))
+        {
             // 新增后的实体中是存在id的
             Long newId = Long.valueOf(PropertyUtils.getProperty(result, ID).toString());
             action.setObjectId(newId);
             List<ChangeItem> changeItems = DifferentUtil.getInsertChangeItems(joinPointArg);
             action.getChanges().addAll(changeItems);
-        } else {
-            if (SAVE.equals(method)) {
+        }
+        else
+        {
+            if (SAVE.equals(method))
+            {
                 // 更新
                 List<ChangeItem> changeItems = DifferentUtil.getChangeItems(oldObj, joinPointArg);
                 action.getChanges().addAll(changeItems);
-            } else if (DELETE.equals(method)) {
+            }
+            else if (DELETE.equals(method))
+            {
                 // 删除
                 ChangeItem changeItem = DifferentUtil.getDeleteChangeItem(oldObj);
                 action.getChanges().add(changeItem);

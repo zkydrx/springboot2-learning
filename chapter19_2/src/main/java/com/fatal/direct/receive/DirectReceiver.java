@@ -17,12 +17,15 @@ import java.time.LocalDateTime;
  */
 @Slf4j
 @Component
-public class DirectReceiver {
+public class DirectReceiver
+{
 
     @Transactional(rollbackFor = Exception.class)
     @RabbitListener(queues = {DirectRabbitConfig.DIRECT_QUEUE})
-    public void receive(String messages, Message message, Channel channel) throws Exception {
-        try {
+    public void receive(String messages, Message message, Channel channel) throws Exception
+    {
+        try
+        {
             log.info("【DirectReceiver接收到消息】 -- [{}]", messages);
             /**
              * @method void basicAck(long deliveryTag, boolean multiple) throws IOException
@@ -32,10 +35,14 @@ public class DirectReceiver {
              *      false: 仅确认提供的传递标签指向的那条消息
              */
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             // TODO Ack失败的后续处理
             log.error("【Ack失败】 time = {}", LocalDateTime.now());
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             // TODO 业务异常的后续处理
             log.error("【消费失败，业务异常】 time = {}", LocalDateTime.now());
         }

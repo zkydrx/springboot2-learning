@@ -20,31 +20,39 @@ import java.util.Random;
  */
 @Slf4j
 @Component
-public class TaskConsumer {
+public class TaskConsumer
+{
 
     private Random random = new Random();
 
     @RabbitListener(queues = RabbitMQConfig.TASK_QUEUE)
     @Transactional(rollbackFor = Exception.class)
-    public void taskConsumer(@Payload User user, Message message, Channel channel) throws Exception {
+    public void taskConsumer(@Payload User user, Message message, Channel channel) throws Exception
+    {
         log.info("【taskConsumer 消费消息】 - [消费时间] - [{}] - [{}]", LocalDateTime.now(), user);
-        try {
+        try
+        {
             // 模拟业务异常
-//            int i = 1/0;
+            //            int i = 1/0;
             // 模拟 Ack 失败
             int number = random.nextInt(100);
-            if (number % 2 == 0) {
+            if (number % 2 == 0)
+            {
                 throw new IOException("taskConsumer Ack失败");
             }
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             // TODO Ack失败的后续处理
             log.error("【taskConsumer Ack失败】 time = {}", LocalDateTime.now());
             // 消息转移
             basicNack(message, channel);
             // 抛出异常，让消费端事务回滚
             throw new IOException(e);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             // TODO 业务异常的后续处理
             log.error("【taskConsumer 消费失败，业务异常】 time = {}", LocalDateTime.now());
             // 消息转移
@@ -57,15 +65,19 @@ public class TaskConsumer {
 
     /**
      * 将消费失败的信息转移到死信队列
+     *
      * @param message
      * @param channel
      * @throws IOException
      */
-    private void basicNack(Message message, Channel channel) throws IOException {
-        try {
+    private void basicNack(Message message, Channel channel) throws IOException
+    {
+        try
+        {
             // 模拟 Nack 失败
             int number = random.nextInt(100);
-            if (number % 2 == 0) {
+            if (number % 2 == 0)
+            {
                 throw new IOException();
             }
             /**
@@ -82,8 +94,10 @@ public class TaskConsumer {
              * @desc basicNack 与 basicReject 的唯一区别：basicNack 可以选择拒绝传递标签之前（包括提供的传递标签）的所有消息
              */
             channel.basicNack(message.getMessageProperties().getDeliveryTag(), true, false);
-//            channel.basicReject(message.getMessageProperties().getDeliveryTag(), false);
-        } catch (Exception e) {
+            //            channel.basicReject(message.getMessageProperties().getDeliveryTag(), false);
+        }
+        catch (Exception e)
+        {
             log.error("【taskConsumer Nack失败】 time = {}", LocalDateTime.now());
             /**
              * basicRecover 在这里解决消费端ack和nack失败和断网问题。怎么说呢？

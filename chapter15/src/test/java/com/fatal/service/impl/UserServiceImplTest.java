@@ -16,13 +16,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class UserServiceImplTest {
+public class UserServiceImplTest
+{
 
     @Autowired
     private IUserService service;
 
     @Test
-    public void insertOrUpdate() {
+    public void insertOrUpdate()
+    {
         User user = new User().setUsername("micai").setPassword("18");
         User result = service.insertOrUpdate(user);
         log.info("【添加成功】 user -> {}", result);
@@ -33,7 +35,8 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void remove() {
+    public void remove()
+    {
         User result = service.remove(1l);
         log.info("【删除成功】 user -> {}", result);
     }
@@ -42,7 +45,8 @@ public class UserServiceImplTest {
      * 使用该方法即可测试缓存的存在了
      */
     @Test
-    public void selectById() {
+    public void selectById()
+    {
         User user = new User().setUsername("micai").setPassword("18");
         User result = service.insertOrUpdate(user);
         log.info("【添加成功】 user -> {}", result);

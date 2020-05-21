@@ -13,7 +13,8 @@ import org.springframework.context.annotation.Configuration;
  * @date: 2019/7/6 0006 23:45
  */
 @Configuration
-public class DirectRabbitConfig {
+public class DirectRabbitConfig
+{
 
     public static final String DIRECT_EXCHANGE = "direct_exchange";
 
@@ -23,20 +24,21 @@ public class DirectRabbitConfig {
 
 
     @Bean
-    public Queue directQueue() {
+    public Queue directQueue()
+    {
         return new Queue(DIRECT_QUEUE);
     }
 
     @Bean
-    public DirectExchange directExchange() {
+    public DirectExchange directExchange()
+    {
         return new DirectExchange(DIRECT_EXCHANGE);
     }
 
     @Bean
-    public Binding directBinding(@Qualifier("directQueue") Queue queue, DirectExchange directExchange) {
-        return BindingBuilder.bind(queue)
-                .to(directExchange)
-                .with(ROUTING_KEY);
+    public Binding directBinding(@Qualifier("directQueue") Queue queue, DirectExchange directExchange)
+    {
+        return BindingBuilder.bind(queue).to(directExchange).with(ROUTING_KEY);
     }
 
 }

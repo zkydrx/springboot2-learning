@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 配置类
+ *
  * @author: Fatal
  * @date: 2018/9/20 0020 16:16
  */
@@ -16,7 +17,8 @@ import org.springframework.stereotype.Component;
 @PropertySource(value = {"classpath:test.properties"})
 @ToString
 @Data
-public class Fatal4 {
+public class Fatal4
+{
 
     private String name;
 

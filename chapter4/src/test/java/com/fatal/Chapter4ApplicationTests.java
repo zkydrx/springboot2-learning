@@ -17,15 +17,16 @@ import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Chapter4ApplicationTests {
+public class Chapter4ApplicationTests
+{
 
     private Random random = new Random();
 
     @Test
-    public void contextLoads() {
+    public void contextLoads()
+    {
         List<String> strings = Arrays.asList("小米", "米彩", "米琪", "米澜");
-        Map<String, Integer> collect = strings.stream()
-                .collect(Collectors.toMap(Function.identity(), e -> random.nextInt()));
+        Map<String, Integer> collect = strings.stream().collect(Collectors.toMap(Function.identity(), e -> random.nextInt()));
         System.out.println(collect);
     }
 

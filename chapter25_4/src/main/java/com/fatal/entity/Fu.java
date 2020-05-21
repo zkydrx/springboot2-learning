@@ -7,7 +7,8 @@ import lombok.Data;
  * @date 2019/8/8 0008 17:29
  */
 @Data
-public class Fu {
+public class Fu
+{
 
     private String privateFu;
 

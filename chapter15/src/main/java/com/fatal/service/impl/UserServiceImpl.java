@@ -16,14 +16,16 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl implements IUserService
+{
 
     @Autowired
     private IUserDao dao;
 
     @Override
     @CachePut(cacheNames = "user", key = "#user.id")
-    public User insertOrUpdate(User user) {
+    public User insertOrUpdate(User user)
+    {
         // 健壮性判断...
         log.info("进入【insertOrUpdate】方法");
         return dao.insertOrUpdate(user);
@@ -31,7 +33,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     @CacheEvict(cacheNames = "user", key = "#id")
-    public User remove(Long id) {
+    public User remove(Long id)
+    {
         // 健壮性判断...
         log.info("进入【remove】方法");
         return dao.remove(id);
@@ -39,7 +42,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     @Cacheable(cacheNames = "user", key = "#id")
-    public User selectById(Long id) {
+    public User selectById(Long id)
+    {
         // 健壮性判断...
         log.info("进入【selectById】方法");
         return dao.selectById(id);

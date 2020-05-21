@@ -2,7 +2,8 @@ package com.fatal.mapper;
 
 import com.fatal.entity.User;
 
-public interface UserMapper {
+public interface UserMapper
+{
     int deleteByPrimaryKey(Integer id);
 
     int insert(User record);

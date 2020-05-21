@@ -7,9 +7,11 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @SpringBootApplication
 // 强制使用cglib代理
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-public class Chapter253Application {
+public class Chapter253Application
+{
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         SpringApplication.run(Chapter253Application.class, args);
     }
 }

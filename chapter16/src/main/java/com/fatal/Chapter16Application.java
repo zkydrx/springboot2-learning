@@ -6,9 +6,11 @@ import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
 @EnableCaching  // 启用缓存
-public class Chapter16Application {
+public class Chapter16Application
+{
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         SpringApplication.run(Chapter16Application.class, args);
     }
 }

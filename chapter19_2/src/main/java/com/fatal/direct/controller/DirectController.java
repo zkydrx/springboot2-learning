@@ -12,17 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/direct")
-public class DirectController {
+public class DirectController
+{
 
     private DirectSender sender;
 
     @Autowired
-    public DirectController(DirectSender sender) {
+    public DirectController(DirectSender sender)
+    {
         this.sender = sender;
     }
 
     @GetMapping
-    public void send() {
+    public void send()
+    {
         sender.send();
     }
 

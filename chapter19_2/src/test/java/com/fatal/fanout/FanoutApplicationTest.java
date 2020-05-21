@@ -13,13 +13,15 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class FanoutApplicationTest {
+public class FanoutApplicationTest
+{
 
     @Autowired
     private FanoutSender sender;
 
     @Test
-    public void send() {
+    public void send()
+    {
         sender.send();
     }
 

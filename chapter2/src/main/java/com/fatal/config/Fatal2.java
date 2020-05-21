@@ -11,6 +11,7 @@ import java.util.Set;
 
 /**
  * 配置类
+ *
  * @author: Fatal
  * @date: 2018/9/20 0020 16:16
  */
@@ -18,7 +19,8 @@ import java.util.Set;
 @ConfigurationProperties(prefix = "fatal")
 @ToString
 @Data
-public class Fatal2 {
+public class Fatal2
+{
 
     private String name;
 

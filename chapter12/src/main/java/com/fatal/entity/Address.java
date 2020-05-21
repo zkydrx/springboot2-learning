@@ -7,13 +7,15 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
  * 地址 实体
+ *
  * @author Fatal
  * @date 2019/8/9 0009 17:58
  */
 @Data
 @Accessors(chain = true)
 @Document(collection = "address")
-public class Address {
+public class Address
+{
 
     /**
      * 该 id 主要供 mongodb 内部使用

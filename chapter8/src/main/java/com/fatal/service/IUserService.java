@@ -5,10 +5,12 @@ import com.github.pagehelper.PageInfo;
 
 /**
  * User 服务
+ *
  * @author: Fatal
  * @date: 2018/10/4 0004 17:09
  */
-public interface IUserService {
+public interface IUserService
+{
 
     Integer addUser(User user);
 

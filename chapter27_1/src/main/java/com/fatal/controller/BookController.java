@@ -17,13 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/books")
-public class BookController {
+public class BookController
+{
 
     // 因为重复提交的数据相同，所以这里用请求数据作为key
     @LocalLock(key = "book:arg[0]")
     @PostMapping("/insert")
-    public String insert(@Validated @RequestBody Book book, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+    public String insert(@Validated @RequestBody Book book, BindingResult bindingResult)
+    {
+        if (bindingResult.hasErrors())
+        {
             return bindingResult.getFieldError().getDefaultMessage();
         }
         book.setId(System.currentTimeMillis());

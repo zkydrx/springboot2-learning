@@ -25,7 +25,8 @@ import java.util.List;
  * @author Fatal
  * @date 2019/9/24 0024 8:40
  */
-public class ElasticsearchTemplateTests extends Chapter32ApplicationTests {
+public class ElasticsearchTemplateTests extends Chapter32ApplicationTests
+{
 
     @Autowired
     private ElasticsearchTemplate template;
@@ -37,14 +38,10 @@ public class ElasticsearchTemplateTests extends Chapter32ApplicationTests {
      * 新增文档
      */
     @Test
-    public void indexTest() {
-        City city = City.builder()
-                .name("海贼王")
-                .theDetail("《航海王》是日本漫画家尾田荣一郎作画的少年漫画作品，在《周刊少年Jump》1997年第34号开始连载，电子版由漫番漫画连载。改编的电视动画《航海王》于1999年10月20日起在富士电...")
-                .build();
-        IndexQuery indexQuery = new IndexQueryBuilder()
-                .withObject(city)
-                .build();
+    public void indexTest()
+    {
+        City city = City.builder().name("海贼王").theDetail("《航海王》是日本漫画家尾田荣一郎作画的少年漫画作品，在《周刊少年Jump》1997年第34号开始连载，电子版由漫番漫画连载。改编的电视动画《航海王》于1999年10月20日起在富士电...").build();
+        IndexQuery indexQuery = new IndexQueryBuilder().withObject(city).build();
         String documentId = template.index(indexQuery);
         System.out.println(documentId);
     }
@@ -53,34 +50,25 @@ public class ElasticsearchTemplateTests extends Chapter32ApplicationTests {
      * 批量新增文档
      */
     @Test
-    public void bulkIndexTest() {
-        List<IndexQuery> queries = Arrays.asList(
-                new IndexQueryBuilder()
-                        .withObject(City.builder().name("重庆").theDetail("重庆文化"))
-                        .build(),
-                new IndexQueryBuilder()
-                        .withObject(City.builder().name("长沙").theDetail("长沙文化"))
-                        .build()
-        );
+    public void bulkIndexTest()
+    {
+        List<IndexQuery> queries = Arrays.asList(new IndexQueryBuilder().withObject(City.builder().name("重庆").theDetail("重庆文化")).build(),
+                                                 new IndexQueryBuilder().withObject(City.builder().name("长沙").theDetail("长沙文化")).build());
         template.bulkIndex(queries);
     }
 
     @Test
-    public void queryStringTest() {
-        NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
-                .withQuery(QueryBuilders.queryStringQuery("惠州"))
-                .withPageable(PageRequest.of(0, 5))
-                .build();
+    public void queryStringTest()
+    {
+        NativeSearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.queryStringQuery("惠州")).withPageable(PageRequest.of(0, 5)).build();
         List<City> cities = template.queryForList(searchQuery, City.class);
         cities.forEach(System.out::println);
     }
 
     @Test
-    public void matchQueryTest() {
-        NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
-                .withQuery(QueryBuilders.matchQuery("theDetail", "美食"))
-                .withPageable(PageRequest.of(0, 5))
-                .build();
+    public void matchQueryTest()
+    {
+        NativeSearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchQuery("theDetail", "美食")).withPageable(PageRequest.of(0, 5)).build();
         List<City> cities = template.queryForList(searchQuery, City.class);
         cities.forEach(System.out::println);
     }
@@ -89,17 +77,15 @@ public class ElasticsearchTemplateTests extends Chapter32ApplicationTests {
      * 测试高亮查询
      */
     @Test
-    public void highLightTest() {
+    public void highLightTest()
+    {
         MatchQueryBuilder queryBuilder = QueryBuilders.matchQuery("theDetail", "美食");
         // 指定高亮的class属性值之后，具体样式交给前端设计。支持设置多种class属性值。
-        HighlightBuilder highlightBuilder = new HighlightBuilder()
-                .preTags(HighlightBuilder.DEFAULT_STYLED_PRE_TAG)
-                .postTags(HighlightBuilder.DEFAULT_STYLED_POST_TAGS);
-        NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
-                .withQuery(queryBuilder)
-                .withHighlightFields(new HighlightBuilder.Field("theDetail"))
-                .withHighlightBuilder(highlightBuilder)
-                .build();
+        HighlightBuilder highlightBuilder = new HighlightBuilder().preTags(HighlightBuilder.DEFAULT_STYLED_PRE_TAG).postTags(HighlightBuilder.DEFAULT_STYLED_POST_TAGS);
+        NativeSearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(queryBuilder)
+                                                                      .withHighlightFields(new HighlightBuilder.Field("theDetail"))
+                                                                      .withHighlightBuilder(highlightBuilder)
+                                                                      .build();
         Page<City> page = template.queryForPage(searchQuery, City.class, customResultMapper);
         page.forEach(System.out::println);
     }

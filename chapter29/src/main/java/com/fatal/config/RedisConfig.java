@@ -14,25 +14,29 @@ import java.io.Serializable;
 
 /**
  * Redis 配置组件
+ *
  * @author Fatal
  * @date 2019/8/14 0014 19:26
  */
 @Configuration
-public class RedisConfig {
+public class RedisConfig
+{
 
     /**
      * 自定义 RedisCacheConfiguration
+     *
      * @return
      */
     @Bean
-    public RedisCacheConfiguration redisCacheConfiguration() {
+    public RedisCacheConfiguration redisCacheConfiguration()
+    {
         return RedisCacheConfiguration.defaultCacheConfig()
-                // 自定义 key 的序列化器
-                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(keySerializer()))
-                // 自定义 value 的序列化器
-                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(genericJackson2JsonRedisSerializer()))
-                // 禁止缓存 null 值
-                .disableCachingNullValues();
+                                      // 自定义 key 的序列化器
+                                      .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(keySerializer()))
+                                      // 自定义 value 的序列化器
+                                      .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(genericJackson2JsonRedisSerializer()))
+                                      // 禁止缓存 null 值
+                                      .disableCachingNullValues();
     }
 
     /**
@@ -41,10 +45,12 @@ public class RedisConfig {
      * Value: genericJackson2JsonRedisSerializer
      * HashKey: genericJackson2JsonRedisSerializer
      * HashValue: genericJackson2JsonRedisSerializer
+     *
      * @return
      */
     @Bean
-    public RedisTemplate<String, Serializable> serializableRedisTemplate(LettuceConnectionFactory connectionFactory) {
+    public RedisTemplate<String, Serializable> serializableRedisTemplate(LettuceConnectionFactory connectionFactory)
+    {
         RedisTemplate<String, Serializable> redisTemplate = new RedisTemplate<>();
         redisTemplate.setKeySerializer(keySerializer());
         redisTemplate.setValueSerializer(genericJackson2JsonRedisSerializer());
@@ -55,13 +61,15 @@ public class RedisConfig {
     }
 
     @Bean
-    public RedisSerializer<String> keySerializer() {
+    public RedisSerializer<String> keySerializer()
+    {
         return new StringRedisSerializer();
     }
 
     @Bean
-    public GenericJackson2JsonRedisSerializer genericJackson2JsonRedisSerializer() {
+    public GenericJackson2JsonRedisSerializer genericJackson2JsonRedisSerializer()
+    {
         return new GenericJackson2JsonRedisSerializer();
     }
-    
+
 }

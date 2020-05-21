@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 @Data
-public class FatalController {
+public class FatalController
+{
 
     private GlobalExceptionHandler handler;
 
-    FatalController(GlobalExceptionHandler handler) {
+    FatalController(GlobalExceptionHandler handler)
+    {
         this.handler = handler;
     }
 
@@ -26,7 +28,8 @@ public class FatalController {
      * 模拟 400 错误
      */
     @GetMapping("/400")
-    public void error400 (@RequestParam(value = "data", required = true) String data) {
+    public void error400(@RequestParam(value = "data", required = true) String data)
+    {
 
     }
 
@@ -34,7 +37,8 @@ public class FatalController {
      * 测试传统定制的json数据
      */
     @GetMapping("/traditional")
-    public void errorTraditional500() {
+    public void errorTraditional500()
+    {
         throw new TraditionalException();
     }
 
@@ -42,7 +46,8 @@ public class FatalController {
      * 测试定制的json数据（保持自适应效果）
      */
     @GetMapping("/adaptive")
-    public void errorAdaptive500() {
+    public void errorAdaptive500()
+    {
         throw new AdaptiveException();
     }
 

@@ -12,7 +12,8 @@ import java.time.Duration;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Chapter13ApplicationTests {
+public class Chapter13ApplicationTests
+{
 
     @Autowired
     private RedisProperties properties;
@@ -21,22 +22,26 @@ public class Chapter13ApplicationTests {
     private JedisPool jedisPool;
 
     @Test
-    public void fun1() {
+    public void fun1()
+    {
         System.out.println(properties);
         System.out.println();
     }
 
     @Test
-    public void fun2() {
+    public void fun2()
+    {
         Duration timeout = properties.getTimeout();
-        if (timeout != null) {
-            int l = (int)timeout.toMillis();    // 10000
+        if (timeout != null)
+        {
+            int l = (int) timeout.toMillis();    // 10000
             System.out.println(l);
         }
     }
 
     @Test
-    public void fun3() {
+    public void fun3()
+    {
         System.out.println(jedisPool);
         System.out.println(jedisPool.getResource());
     }

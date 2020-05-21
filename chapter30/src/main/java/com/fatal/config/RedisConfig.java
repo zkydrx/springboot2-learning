@@ -12,14 +12,17 @@ import java.io.Serializable;
 
 /**
  * Redis 配置类
+ *
  * @author Fatal
  * @date 2019/8/22 0022 9:35
  */
 @Configuration
-public class RedisConfig {
+public class RedisConfig
+{
 
     @Bean
-    public RedisTemplate<String, Serializable> redisTemplate(LettuceConnectionFactory connectionFactory) {
+    public RedisTemplate<String, Serializable> redisTemplate(LettuceConnectionFactory connectionFactory)
+    {
         RedisTemplate<String, Serializable> redisTemplate = new RedisTemplate<>();
         redisTemplate.setKeySerializer(keyRedisSerializer());
         redisTemplate.setValueSerializer(genericJackson2JsonRedisSerializer());
@@ -28,12 +31,14 @@ public class RedisConfig {
     }
 
     @Bean
-    public RedisSerializer keyRedisSerializer () {
+    public RedisSerializer keyRedisSerializer()
+    {
         return new StringRedisSerializer();
     }
 
     @Bean
-    public GenericJackson2JsonRedisSerializer genericJackson2JsonRedisSerializer() {
+    public GenericJackson2JsonRedisSerializer genericJackson2JsonRedisSerializer()
+    {
         return new GenericJackson2JsonRedisSerializer();
     }
 

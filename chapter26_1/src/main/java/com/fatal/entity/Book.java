@@ -13,11 +13,13 @@ import java.util.List;
 
 /**
  * Book 实体
+ *
  * @author: Fatal
  * @date: 2018/11/27 0027 16:56
  */
 @Data
-public class Book {
+public class Book
+{
 
     private Long id;
 

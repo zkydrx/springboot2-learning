@@ -10,7 +10,8 @@ import javax.validation.constraints.NotBlank;
  * @date: 2018/11/27 0027 18:22
  */
 @Data
-public class Reader {
+public class Reader
+{
 
     private Long id;
 

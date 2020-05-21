@@ -11,17 +11,20 @@ import java.io.Serializable;
 
 /**
  * Redis 配置类
+ *
  * @author: Fatal
  * @date: 2018/10/13 0013 14:52
  */
 @Configuration
-public class RedisConfig {
+public class RedisConfig
+{
 
     /**
      * 自定义RedisTemplate模板
      */
     @Bean
-    public RedisTemplate<String, Serializable> serializableRedisTemplate(LettuceConnectionFactory redisConnectionFactory) {
+    public RedisTemplate<String, Serializable> serializableRedisTemplate(LettuceConnectionFactory redisConnectionFactory)
+    {
         RedisTemplate<String, Serializable> template = new RedisTemplate<>();
         // key序列化
         template.setKeySerializer(new StringRedisSerializer());

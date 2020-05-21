@@ -7,10 +7,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Chapter192ApplicationTests {
+public class Chapter192ApplicationTests
+{
 
     @Test
-    public void fun() {
+    public void fun()
+    {
     }
 
 }

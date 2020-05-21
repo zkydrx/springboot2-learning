@@ -17,12 +17,14 @@ import java.util.stream.Collectors;
  * @date: 2018/9/26 0026 17:00
  */
 @Controller
-public class FatalController {
+public class FatalController
+{
 
     private Random random = new Random();
 
     @GetMapping("/hello")
-    public String success(Model model) {
+    public String success(Model model)
+    {
         model.addAttribute("hello", "Hello Wolrd! thymeleaf渲染成功！");
         return "hello";
     }
@@ -31,7 +33,8 @@ public class FatalController {
      * 测试行内表达式
      */
     @GetMapping("/inlining")
-    public String inlining(Model model) {
+    public String inlining(Model model)
+    {
         model.addAttribute("hello", "<h2>hello</h2>");
         return "inlining";
     }
@@ -40,7 +43,8 @@ public class FatalController {
      * 测试 *{}
      */
     @GetMapping("/test1")
-    public String test1(Model model) {
+    public String test1(Model model)
+    {
         model.addAttribute("user", new User().setName("米彩").setAge(18));
         return "test1";
     }
@@ -49,7 +53,8 @@ public class FatalController {
      * 测试 #{}
      */
     @GetMapping("/test2")
-    public String test2(Model model) {
+    public String test2(Model model)
+    {
         return "test2";
     }
 
@@ -57,7 +62,8 @@ public class FatalController {
      * 测试 @{}
      */
     @GetMapping("/test3")
-    public String test3(Model model) {
+    public String test3(Model model)
+    {
         return "test3";
     }
 
@@ -65,7 +71,8 @@ public class FatalController {
      * 测试 ~{} （选择器和片段名）
      */
     @GetMapping("/test4")
-    public String test4(Model model) {
+    public String test4(Model model)
+    {
         return "test4";
     }
 
@@ -73,7 +80,8 @@ public class FatalController {
      * 测试 ~{} （th:insert，th:replace， th:include）
      */
     @GetMapping("/test5")
-    public String test5(Model model) {
+    public String test5(Model model)
+    {
         return "test5";
     }
 
@@ -81,11 +89,11 @@ public class FatalController {
      * 测试 th:each
      */
     @GetMapping("/test6")
-    public String test6(Model model) {
+    public String test6(Model model)
+    {
         List<String> strings = Arrays.asList("小米", "米彩", "米琪", "米澜");
-        Map<Integer ,String> collect = strings.stream()
-                .collect(Collectors.toMap(e -> random.nextInt(100), Function.identity()));
-        model.addAttribute("users",collect);
+        Map<Integer, String> collect = strings.stream().collect(Collectors.toMap(e -> random.nextInt(100), Function.identity()));
+        model.addAttribute("users", collect);
         return "test6";
     }
 
@@ -93,8 +101,9 @@ public class FatalController {
      * 测试 th:if
      */
     @GetMapping("/test7")
-    public String test7(Model model) {
-        model.addAttribute("age",18);
+    public String test7(Model model)
+    {
+        model.addAttribute("age", 18);
         return "test7";
     }
 

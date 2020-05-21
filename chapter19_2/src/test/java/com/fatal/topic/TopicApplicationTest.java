@@ -13,13 +13,15 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class TopicApplicationTest {
+public class TopicApplicationTest
+{
 
     @Autowired
     private TopicSender topicSender;
 
     @Test
-    public void send() {
+    public void send()
+    {
         topicSender.send();
     }
 

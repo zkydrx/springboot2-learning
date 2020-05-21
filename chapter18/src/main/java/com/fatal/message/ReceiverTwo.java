@@ -7,11 +7,13 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * 消费者Two
+ *
  * @author: Fatal
  * @date: 2018/10/18 0018 15:34
  */
 @Slf4j
-public class ReceiverTwo {
+public class ReceiverTwo
+{
 
     private CountDownLatch latch;
 
@@ -19,11 +21,13 @@ public class ReceiverTwo {
      * 使用`@Autowired`的Setter方法注入方式
      */
     @Autowired
-    public ReceiverTwo(CountDownLatch latch) {
+    public ReceiverTwo(CountDownLatch latch)
+    {
         this.latch = latch;
     }
 
-    public void receiveMessage(String message) {
+    public void receiveMessage(String message)
+    {
         log.info("【消费者 ReceiverTwo】：我消费了<" + message + ">");
         // Decrements the count of the latch, releasing all waiting threads if the count reaches zero.
         latch.countDown();

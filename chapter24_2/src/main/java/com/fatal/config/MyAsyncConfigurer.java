@@ -17,17 +17,21 @@ import java.util.concurrent.ThreadPoolExecutor;
  * 配置异常线程池，异步异常处理类
  * 当我们使用@Async时，SpringBoot如果判断出容器中有`AsyncConfigurer`类型的配置组件,
  * 它就会在该组件中是否有`Executor`类型的线程池组件，如果没有，则会报错。
+ *
  * @author: Fatal
  * @date: 2018/10/31 0031 11:22
  */
 @Slf4j
 @EnableAsync    // 开启异步功能
 @Configuration
-public class MyAsyncConfigurer implements AsyncConfigurer {
+public class MyAsyncConfigurer implements AsyncConfigurer
+{
 
-    @Bean /** 创建一个该类型的组件放到Spring容器中 */
+    @Bean
+    /** 创建一个该类型的组件放到Spring容器中 */
     @Override
-    public Executor getAsyncExecutor() {
+    public Executor getAsyncExecutor()
+    {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         /** 核心线程数10：线程池创建时候初始化的线程数 */
         executor.setCorePoolSize(10);
@@ -48,21 +52,26 @@ public class MyAsyncConfigurer implements AsyncConfigurer {
     }
 
     @Override
-    public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
+    public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler()
+    {
         return new MyAsyncExceptionHandler();
     }
 
     /**
      * 自定义异步方法返回类型为void的异常处理类
+     *
      * @Desc: 返回值为void的异步方法出现异常，就会被这个处理类捕获
      */
-    class MyAsyncExceptionHandler implements AsyncUncaughtExceptionHandler {
+    class MyAsyncExceptionHandler implements AsyncUncaughtExceptionHandler
+    {
 
         @Override
-        public void handleUncaughtException(Throwable throwable, Method method, Object... objects) {
+        public void handleUncaughtException(Throwable throwable, Method method, Object... objects)
+        {
             log.info("Exception message - " + throwable.getMessage());
             log.info("Method name - " + method.getName());
-            for (Object param : objects) {
+            for (Object param : objects)
+            {
                 log.info("Parameter value - " + param);
             }
         }

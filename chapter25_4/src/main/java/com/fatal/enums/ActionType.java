@@ -3,7 +3,8 @@ package com.fatal.enums;
 import lombok.Getter;
 
 @Getter
-public enum ActionType {
+public enum ActionType
+{
 
     /**
      * 添加
@@ -24,7 +25,8 @@ public enum ActionType {
 
     private int code;
 
-    ActionType(String name, int code) {
+    ActionType(String name, int code)
+    {
         this.name = name;
         this.code = code;
     }

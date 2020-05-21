@@ -7,7 +7,8 @@ import lombok.Getter;
  * @date 2019/8/18 0018 11:10
  */
 @Getter
-public enum ResponseEnum {
+public enum ResponseEnum
+{
 
     /**
      * 购物车sku数量超出范围
@@ -35,7 +36,8 @@ public enum ResponseEnum {
 
     private String message;
 
-    ResponseEnum(Integer code, String message) {
+    ResponseEnum(Integer code, String message)
+    {
         this.code = code;
         this.message = message;
     }

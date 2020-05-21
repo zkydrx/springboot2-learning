@@ -14,13 +14,15 @@ import java.time.LocalDateTime;
 
 /**
  * Book 控制器
+ *
  * @author: Fatal
  * @date: 2018/10/23 0023 12:37
  */
 @Slf4j
 @RestController
 @RequestMapping("/books")
-public class BookController {
+public class BookController
+{
 
     private final RabbitTemplate rabbitTemplate;
 
@@ -28,24 +30,25 @@ public class BookController {
      * 使用构造方法注入
      */
     @Autowired
-    public BookController(RabbitTemplate rabbitTemplate) {
+    public BookController(RabbitTemplate rabbitTemplate)
+    {
         this.rabbitTemplate = rabbitTemplate;
     }
 
     @GetMapping
-    public void send() {
+    public void send()
+    {
         Book book = new Book(1L, "六月与便士");
         // 添加延迟队列
-        this.rabbitTemplate.convertAndSend(RabbitMQConfig.DELAY_EXCHANGE_NAME,
-                RabbitMQConfig.DELAY_ROUTING_KEY, book, message -> {
-                    /**
-                     * @desc: 对消息本身进行单独设置，每条消息的TTL可以不同。
-                     * @careful: 如果你在`延迟队列`中配置了params.put("x-message-ttl", 5 * 1000);那么下面
-                     *  这句就可以省略，二选一即可
-                     */
-                    message.getMessageProperties().setExpiration(String.valueOf(5 * 1000));
-                    return message;
-                });
+        this.rabbitTemplate.convertAndSend(RabbitMQConfig.DELAY_EXCHANGE_NAME, RabbitMQConfig.DELAY_ROUTING_KEY, book, message -> {
+            /**
+             * @desc: 对消息本身进行单独设置，每条消息的TTL可以不同。
+             * @careful: 如果你在`延迟队列`中配置了params.put("x-message-ttl", 5 * 1000);那么下面
+             *  这句就可以省略，二选一即可
+             */
+            message.getMessageProperties().setExpiration(String.valueOf(5 * 1000));
+            return message;
+        });
         log.info("[发送时间] - [{}]", LocalDateTime.now());
     }
 

@@ -12,17 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/fanout")
-public class FanoutController {
+public class FanoutController
+{
 
     private FanoutSender sender;
 
     @Autowired
-    public FanoutController(FanoutSender sender) {
+    public FanoutController(FanoutSender sender)
+    {
         this.sender = sender;
     }
 
     @GetMapping
-    public void send() {
+    public void send()
+    {
         // 发布
         sender.send();
     }

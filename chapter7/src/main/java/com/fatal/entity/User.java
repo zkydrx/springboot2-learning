@@ -12,7 +12,8 @@ import java.util.Date;
  */
 @Data
 @Accessors(chain = true)
-public class User implements Serializable {
+public class User implements Serializable
+{
 
     private Integer id;
     private String name;

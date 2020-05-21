@@ -4,7 +4,8 @@ package com.fatal.constants;
  * @author Fatal
  * @date 2019/8/31 0031 12:23
  */
-public interface LockConstant {
+public interface LockConstant
+{
 
     /**
      * 锁前缀
@@ -13,10 +14,12 @@ public interface LockConstant {
 
     /**
      * 格式化
+     *
      * @param lockName
      * @return
      */
-    static String format(String lockName) {
+    static String format(String lockName)
+    {
         return String.format(LockConstant.LOCK_PREFIX, lockName);
     }
 

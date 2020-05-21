@@ -7,9 +7,11 @@ import com.fatal.jdk_dynamic_proxy.RealSubject;
  * @author: Fatal
  * @date: 2018/11/12 0012 15:20
  */
-public class Client {
+public class Client
+{
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
 
         /** 创建被代理对象 */
         RealSubject realSubject = new RealSubject();

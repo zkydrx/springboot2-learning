@@ -9,12 +9,14 @@ import javax.persistence.Id;
  * 与jpa比较（比较易混淆的）
  * 不同点：通用Mapper的@GeneratedValue不加默认自增，而JPA的@GeneratedValue不加默认需要手动添加id
  * 相同点：都需要加上主键注解@Id
+ *
  * @author: Fatal
  * @date: 2018/10/4 0004 17:05
  */
 @Data
 @Accessors(chain = true)
-public class User {
+public class User
+{
 
     @Id
     private Integer id;

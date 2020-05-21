@@ -14,14 +14,16 @@ import java.util.List;
  * @author Fatal
  * @date 2019/8/15 0015 8:54
  */
-public class ShopCartServiceImplTest extends Chapter29ApplicationTests {
+public class ShopCartServiceImplTest extends Chapter29ApplicationTests
+{
 
     private Long userId = 999999L;
     private Long skuId = 1L;
     private Long[] skuIds;
 
     @Before
-    public void before() {
+    public void before()
+    {
         skuIds = new Long[]{7L, 10L, 2L};
     }
 
@@ -29,50 +31,57 @@ public class ShopCartServiceImplTest extends Chapter29ApplicationTests {
     private IShopCartService shopCartService;
 
     @Test
-    public void increment() {
-        shopCartService.increment(userId,2L, 100L);
-        shopCartService.increment(userId,4L, 100L);
-        shopCartService.increment(userId,9L, 100L);
-        shopCartService.increment(userId,3L, 100L);
-        shopCartService.increment(userId,8L, 100L);
-        shopCartService.increment(userId,12L, 100L);
-        shopCartService.increment(userId,1L, 100L);
-        shopCartService.increment(userId,6L, 100L);
-        shopCartService.increment(userId,10L, 100L);
-        shopCartService.increment(userId,11L, 100L);
-        shopCartService.increment(userId,7L, 100L);
+    public void increment()
+    {
+        shopCartService.increment(userId, 2L, 100L);
+        shopCartService.increment(userId, 4L, 100L);
+        shopCartService.increment(userId, 9L, 100L);
+        shopCartService.increment(userId, 3L, 100L);
+        shopCartService.increment(userId, 8L, 100L);
+        shopCartService.increment(userId, 12L, 100L);
+        shopCartService.increment(userId, 1L, 100L);
+        shopCartService.increment(userId, 6L, 100L);
+        shopCartService.increment(userId, 10L, 100L);
+        shopCartService.increment(userId, 11L, 100L);
+        shopCartService.increment(userId, 7L, 100L);
     }
 
     @Test
-    public void removeOne() {
+    public void removeOne()
+    {
         shopCartService.removeOne(userId, 7L);
     }
 
     @Test
-    public void shopCarts() {
+    public void shopCarts()
+    {
         List<ShopCartDTO> shopCartDTOs = shopCartService.shopCarts(userId, 3);
         String json = JsonUtil.toJson(shopCartDTOs);
         System.out.println(json);
     }
 
     @Test
-    public void delete() {
+    public void delete()
+    {
         shopCartService.remove(userId, skuIds);
     }
 
     @Test
-    public void clear() {
+    public void clear()
+    {
         shopCartService.clear(userId);
     }
 
     @Test
-    public void into() {
+    public void into()
+    {
         Integer totalPage = shopCartService.into(userId);
         System.out.println(totalPage);
     }
 
     @Test
-    public void shopCartGrouping() {
+    public void shopCartGrouping()
+    {
         List<Object> list = shopCartService.shopCartGrouping(userId);
         System.out.println(list);
     }

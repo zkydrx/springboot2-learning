@@ -5,11 +5,13 @@ import lombok.Data;
 
 /**
  * Student 实体
+ *
  * @author: Fatal
  * @date: 2018/11/28 0028 11:48
  */
 @Data
-public class Student {
+public class Student
+{
 
     private String name;
 

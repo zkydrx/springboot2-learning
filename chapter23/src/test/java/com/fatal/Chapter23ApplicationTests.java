@@ -9,7 +9,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Chapter23ApplicationTests {
+public class Chapter23ApplicationTests
+{
 
     @Autowired
     private FatalController controller;
@@ -18,7 +19,8 @@ public class Chapter23ApplicationTests {
      * 测试构造方法注入组件不需要在构造方法上加注解`@Autowired`
      */
     @Test
-    public void contextLoads() {
+    public void contextLoads()
+    {
         System.out.println(controller.getHandler());
     }
 

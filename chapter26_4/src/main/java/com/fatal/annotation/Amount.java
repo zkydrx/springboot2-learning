@@ -14,23 +14,25 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * 适用于修饰数量（比如：金额，单位为分）
- * @desc 值必须大于或等于 0
+ *
  * @author Fatal
+ * @desc 值必须大于或等于 0
  * @date 2019/8/12 0012 11:01
  */
-@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
 @Retention(RUNTIME)
 @Documented
 @NotNull
 @Min(0)
-@Constraint(validatedBy = { })
+@Constraint(validatedBy = {})
 @ReportAsSingleViolation
-public @interface Amount {
+public @interface Amount
+{
 
     String message() default "不能为null且不能小于0";
 
-    Class<?>[] groups() default { };
+    Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default { };
+    Class<? extends Payload>[] payload() default {};
 
 }

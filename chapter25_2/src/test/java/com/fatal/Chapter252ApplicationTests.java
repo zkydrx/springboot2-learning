@@ -14,7 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Chapter252ApplicationTests {
+public class Chapter252ApplicationTests
+{
 
     @Autowired
     ProductService productService;
@@ -36,9 +37,10 @@ public class Chapter252ApplicationTests {
      * 测试`匹配包/类`
      */
     @Test
-    public void testPackageOrClass() {
+    public void testPackageOrClass()
+    {
         productService.findById(1L);
-        productService.findByTwoArgs(1L,"hello");
+        productService.findByTwoArgs(1L, "hello");
         productService.execute();
         subService.sub();
     }
@@ -48,7 +50,8 @@ public class Chapter252ApplicationTests {
      * 测试`匹配对象`
      */
     @Test
-    public void testThisAndTarget() {
+    public void testThisAndTarget()
+    {
         logService1.test();
         logService2.test();
         productService.execute();
@@ -60,9 +63,10 @@ public class Chapter252ApplicationTests {
      * 测试`匹配参数`
      */
     @Test
-    public void testArgs() {
+    public void testArgs()
+    {
         productService.findById(1L);
-        productService.findByTwoArgs(1L,"hello");
+        productService.findByTwoArgs(1L, "hello");
         productService.execute();
         subService.sub();
     }
@@ -72,9 +76,10 @@ public class Chapter252ApplicationTests {
      * 测试`匹配注解`
      */
     @Test
-    public void testAnnotation() {
+    public void testAnnotation()
+    {
         productService.findById(1L);
-        productService.findByTwoArgs(1L,"hello");
+        productService.findByTwoArgs(1L, "hello");
         productService.execute();
         subService.sub();
         logService1.test();
@@ -87,26 +92,34 @@ public class Chapter252ApplicationTests {
      * 测试`匹配方法`
      */
     @Test
-    public void testExecution() {
+    public void testExecution()
+    {
         productService.findById(1L);
-        productService.findByTwoArgs(1L,"hello");
+        productService.findByTwoArgs(1L, "hello");
         productService.execute();
-        try {
+        try
+        {
             productService.exDemo();
-        } catch (IllegalAccessException e) {
+        }
+        catch (IllegalAccessException e)
+        {
         }
         subService.sub();
         subTowService.subTwo();
     }
 
     @Test
-    public void testAdvice() {
+    public void testAdvice()
+    {
         productService.execute();
         subService.sub();
         subTowService.subTwo();
-        try {
+        try
+        {
             productService.exDemo();
-        } catch (IllegalAccessException e) {
+        }
+        catch (IllegalAccessException e)
+        {
             e.printStackTrace();
         }
     }

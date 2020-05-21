@@ -11,6 +11,7 @@ import javax.validation.constraints.Min;
 
 /**
  * 配置类
+ *
  * @author: Fatal
  * @date: 2018/9/20 0020 16:16
  */
@@ -19,7 +20,8 @@ import javax.validation.constraints.Min;
 @ToString
 @Data
 @Validated     // 开启校验
-public class Fatal3 {
+public class Fatal3
+{
 
     private String name;
 

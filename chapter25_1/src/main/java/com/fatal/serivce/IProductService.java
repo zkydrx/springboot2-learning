@@ -6,7 +6,8 @@ import com.fatal.entity.Product;
  * @author: Fatal
  * @date: 2018/11/8 0008 11:15
  */
-public interface IProductService {
+public interface IProductService
+{
 
     void insert(Product product);
 

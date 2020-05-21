@@ -12,27 +12,27 @@ import org.springframework.stereotype.Repository;
  * @date: 2018/9/30 0030 21:42
  */
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long>
+{
 
     // 实现`JpaRepository`后有好多方法可以用
 
     /**
      * 自定义分页查询
+     *
      * @param pageable
      * @return
      */
-    @Query(value = "SELECT * FROM USER",
-            countQuery = "SELECT count(*) FROM USER",
-            nativeQuery = true)
+    @Query(value = "SELECT * FROM USER", countQuery = "SELECT count(*) FROM USER", nativeQuery = true)
     Page<User> findPage(Pageable pageable);
 
     /**
      * 动态拼装sql加模糊查询
+     *
      * @param username 用户名
      * @return
      */
-    @Query(value = "SELECT u.* FROM USER u WHERE if(:username != '', u.`username` LIKE CONCAT('%', :username, '%'), 1=1)",
-            countQuery = "SELECT count(u.id) FROM USER u WHERE if(:username != '', u.`username` LIKE CONCAT('%', :username, '%'), 1=1)",
-            nativeQuery = true)
+    @Query(value = "SELECT u.* FROM USER u WHERE if(:username != '', u.`username` LIKE CONCAT('%', :username, '%'), 1=1)", countQuery = "SELECT count(u.id) FROM USER u WHERE if" +
+            "(:username != '', u.`username` LIKE CONCAT('%', :username, '%'), 1=1)", nativeQuery = true)
     Page<User> findPageWithLike(String username, Pageable pageable);
 }

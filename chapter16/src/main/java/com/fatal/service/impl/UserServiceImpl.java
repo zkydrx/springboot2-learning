@@ -18,12 +18,14 @@ import java.util.Set;
 
 /**
  * User 服务实现
+ *
  * @author: Fatal
  * @date: 2018/10/14 0014 17:28
  */
 @Slf4j
 @Service
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl implements IUserService
+{
 
     @Autowired
     private IUserDao dao;
@@ -33,17 +35,17 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     @CachePut(cacheNames = "user", key = "#user.id")
-    public User update(User user) {
+    public User update(User user)
+    {
         // 健壮性判断...
         log.info("进入【update】方法");
         return dao.update(user);
     }
 
     @Override
-    @Caching(evict = {
-            @CacheEvict(cacheNames = "user", key = "#id", beforeInvocation = true)
-    })
-    public User remove(Long id) {
+    @Caching(evict = {@CacheEvict(cacheNames = "user", key = "#id", beforeInvocation = true)})
+    public User remove(Long id)
+    {
         // 健壮性判断...
         log.info("进入【remove】方法");
         // 删除相关的数据，用户都不存在了，那相关的那些缓存留着干嘛
@@ -52,8 +54,9 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    @Cacheable(unless="#result == null", cacheNames = "user", key = "#id")
-    public User selectById(Long id) {
+    @Cacheable(unless = "#result == null", cacheNames = "user", key = "#id")
+    public User selectById(Long id)
+    {
         // 健壮性判断...
         log.info("进入【selectById】方法");
         return dao.selectById(id);
@@ -61,8 +64,9 @@ public class UserServiceImpl implements IUserService {
 
 
     @Override
-    @Cacheable(unless="#result == null || #result.size == 0", cacheNames = "users", key = "'users'")
-    public List<User> listUser() {
+    @Cacheable(unless = "#result == null || #result.size == 0", cacheNames = "users", key = "'users'")
+    public List<User> listUser()
+    {
         // 健壮性判断...
         log.info("进入【listUser()】方法");
         return dao.listUser();
@@ -87,11 +91,13 @@ public class UserServiceImpl implements IUserService {
      * 如果频率偏低的话，那用不用根据实际情况吧。（缓存条数，查询结果的大小等等）
      * 结论：
      * 根据频率决定吧，如果查询条件相同的有一定的几率，建议使用。
+     *
      * @return
      */
     @Override
-    @Cacheable(unless="#result == null || #result.size == 0", cacheNames = "users", key = "#paramDTO.id + ':' + #paramDTO.username")
-    public List<User> listUser(ParamDTO paramDTO) {
+    @Cacheable(unless = "#result == null || #result.size == 0", cacheNames = "users", key = "#paramDTO.id + ':' + #paramDTO.username")
+    public List<User> listUser(ParamDTO paramDTO)
+    {
         // 健壮性判断...
         log.info("进入【listUser(ParamDTO paramDTO)】方法");
         return dao.listUser(paramDTO);
@@ -99,18 +105,17 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     @CacheEvict(cacheNames = "user", key = "#user.id", beforeInvocation = true)
-    public User lowFlowRateWithUpdate(User user) {
+    public User lowFlowRateWithUpdate(User user)
+    {
         // 健壮性判断...
         log.info("进入【update】方法");
         return dao.update(user);
     }
 
     @Override
-    @Caching(evict = {
-            @CacheEvict(cacheNames = "user", key = "#user.id", beforeInvocation = true),
-            @CacheEvict(cacheNames = "user", key = "#user.id")
-    })
-    public User highConcurrencyWithUpdate(User user) {
+    @Caching(evict = {@CacheEvict(cacheNames = "user", key = "#user.id", beforeInvocation = true), @CacheEvict(cacheNames = "user", key = "#user.id")})
+    public User highConcurrencyWithUpdate(User user)
+    {
         // 健壮性判断...
         log.info("进入【update】方法");
         return dao.update(user);
@@ -118,10 +123,12 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 模糊删除多条件生成的缓存
-     * @desc redis 命令没有模糊删除命令。所以使用了 keys * 模糊匹配出需要删除的Set<key>，然后全部删除
+     *
      * @param id
+     * @desc redis 命令没有模糊删除命令。所以使用了 keys * 模糊匹配出需要删除的Set<key>，然后全部删除
      */
-    private void removeByPrefix(Long id) {
+    private void removeByPrefix(Long id)
+    {
         Set<String> keys = template.keys("users::" + id + ":*");
         template.delete(keys);
     }

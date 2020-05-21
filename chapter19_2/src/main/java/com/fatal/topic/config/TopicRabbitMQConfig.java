@@ -10,11 +10,13 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * RabbitMQ 配置类
+ *
  * @author: Fatal
  * @date: 2018/10/22 0022 14:55
  */
 @Configuration
-public class TopicRabbitMQConfig {
+public class TopicRabbitMQConfig
+{
 
     public static final String TOPIC_EXCHANGE = "topic_exchange";
 
@@ -23,28 +25,30 @@ public class TopicRabbitMQConfig {
     private static final String BINDING_KEY = "fatal.#";
 
     @Bean
-    public Queue topicQueue() {
+    public Queue topicQueue()
+    {
         return new Queue(TOPIC_QUEUE, true);
     }
 
-    /** Topic交换机 */
+    /**
+     * Topic交换机
+     */
     @Bean
-    public TopicExchange exchange() {
+    public TopicExchange exchange()
+    {
         return new TopicExchange(TOPIC_EXCHANGE);
     }
 
     /**
-     *  binding组件
-     *  `@Qualifier`: 当容器中出现同种类型的多个组件上，需要用`@Qualifier`来指定使用哪个
-     *  将队列与交换机进行绑定并设置其`路由`
-     *  `fatal.#`:这里的`#`表示匹配所有的意思
+     * binding组件
+     * `@Qualifier`: 当容器中出现同种类型的多个组件上，需要用`@Qualifier`来指定使用哪个
+     * 将队列与交换机进行绑定并设置其`路由`
+     * `fatal.#`:这里的`#`表示匹配所有的意思
      */
     @Bean
-    public Binding topicBinding(@Qualifier("topicQueue") Queue queue, TopicExchange exchange) {
-        return BindingBuilder
-                .bind(queue)
-                .to(exchange)
-                .with(BINDING_KEY);
+    public Binding topicBinding(@Qualifier("topicQueue") Queue queue, TopicExchange exchange)
+    {
+        return BindingBuilder.bind(queue).to(exchange).with(BINDING_KEY);
     }
 
     /**

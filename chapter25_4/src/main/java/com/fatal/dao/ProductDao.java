@@ -7,13 +7,16 @@ import java.util.Optional;
 
 /**
  * Product 数据库访问层
+ *
  * @author: Fatal
  * @date: 2018/11/15 0015 10:55
  */
-public interface ProductDao extends JpaRepository<Product, Long> {
+public interface ProductDao extends JpaRepository<Product, Long>
+{
 
     /**
      * 后面反射要用到
+     *
      * @param aLong
      * @return
      */

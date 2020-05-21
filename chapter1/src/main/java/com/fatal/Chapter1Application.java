@@ -15,19 +15,23 @@ import java.util.Arrays;
  */
 @SpringBootApplication
 @RestController
-public class Chapter1Application {
+public class Chapter1Application
+{
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         SpringApplication.run(Chapter1Application.class, args);
     }
 
     @GetMapping("/demo1")
-    public String demo1() {
+    public String demo1()
+    {
         return "Hello Fatal!";
     }
 
     @Bean
-    public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+    public CommandLineRunner commandLineRunner(ApplicationContext ctx)
+    {
         return args -> {
             System.out.println("来看看我们 SpringBoot 默认提供的 Bean: ");
             String[] beanNames = ctx.getBeanDefinitionNames();

@@ -13,33 +13,39 @@ import java.util.List;
  * @date: 2018/9/30 0030 14:27
  */
 @Service
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl implements IUserService
+{
 
     @Autowired
     private IUserDao userDao;
 
     @Override
-    public List<User> queryUsers() {
+    public List<User> queryUsers()
+    {
         return userDao.queryUsers();
     }
 
     @Override
-    public User getUser(Long id) {
+    public User getUser(Long id)
+    {
         return userDao.getUser(id);
     }
 
     @Override
-    public int delUser(Long id) {
+    public int delUser(Long id)
+    {
         return userDao.delUser(id);
     }
 
     @Override
-    public int addUser(User user) {
+    public int addUser(User user)
+    {
         return userDao.addUser(user);
     }
 
     @Override
-    public int editUser(Long id, User user) {
+    public int editUser(Long id, User user)
+    {
         return userDao.editUser(id, user);
     }
 }

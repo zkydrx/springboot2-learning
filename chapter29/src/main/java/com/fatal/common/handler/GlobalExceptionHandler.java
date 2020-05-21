@@ -11,15 +11,18 @@ import javax.validation.ConstraintViolationException;
  * @date 2019/8/16 0016 14:11
  */
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler
+{
 
     /**
      * 校验异常处理器
+     *
      * @param e
      * @return
      */
     @ExceptionHandler(value = ConstraintViolationException.class)
-    public ResponseEntity<String> constraintViolationException(ConstraintViolationException e) {
+    public ResponseEntity<String> constraintViolationException(ConstraintViolationException e)
+    {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 

@@ -9,12 +9,14 @@ import java.util.stream.Collectors;
 
 /**
  * 购物车skuDTO，去掉了重复的属性
+ *
  * @author Fatal
  * @date 2019/8/15 0015 17:45
  */
 @Data
 @Accessors(chain = true)
-public class ShopCartItemDTO {
+public class ShopCartItemDTO
+{
 
     private Long id;
 
@@ -63,16 +65,16 @@ public class ShopCartItemDTO {
      */
     private Integer status;
 
-    private static ShopCartItemDTO of(ShopCartSkuDTO shopCartSkuDTO) {
+    private static ShopCartItemDTO of(ShopCartSkuDTO shopCartSkuDTO)
+    {
         ShopCartItemDTO shopCartItemDTO = new ShopCartItemDTO();
         BeanUtils.copyProperties(shopCartSkuDTO, shopCartItemDTO);
         return shopCartItemDTO;
     }
 
-    public static List<ShopCartItemDTO> of(List<ShopCartSkuDTO> shopCartSkuDTOs) {
-        return shopCartSkuDTOs.stream()
-                .map(ShopCartItemDTO::of)
-                .collect(Collectors.toList());
+    public static List<ShopCartItemDTO> of(List<ShopCartSkuDTO> shopCartSkuDTOs)
+    {
+        return shopCartSkuDTOs.stream().map(ShopCartItemDTO::of).collect(Collectors.toList());
     }
 
 }

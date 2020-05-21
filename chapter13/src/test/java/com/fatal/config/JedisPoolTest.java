@@ -17,7 +17,8 @@ import redis.clients.jedis.JedisPool;
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class JedisPoolTest {
+public class JedisPoolTest
+{
 
     @Autowired
     private JedisPool pool;
@@ -25,12 +26,14 @@ public class JedisPoolTest {
     private Jedis jedis;
 
     @Before
-    public void before () {
+    public void before()
+    {
         this.jedis = pool.getResource();
     }
 
     @Test
-    public void fun() {
+    public void fun()
+    {
         jedis.set("name", "米彩");
         jedis.set("age", "18");
         log.info("【name】 = {}", jedis.get("name"));

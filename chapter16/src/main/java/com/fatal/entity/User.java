@@ -11,12 +11,14 @@ import java.time.LocalDateTime;
 
 /**
  * User 实体
+ *
  * @author: Fatal
  * @date: 2018/10/15 0015 11:23
  */
 @Data
 @Accessors(chain = true)
-public class User {
+public class User
+{
 
     private Long id;
     private String username;

@@ -8,11 +8,13 @@ import java.math.BigDecimal;
 
 /**
  * Book 实体
+ *
  * @author: Fatal
  * @date: 2018/11/29 0029 9:42
  */
 @Data
-public class Book {
+public class Book
+{
 
     private Long id;
 

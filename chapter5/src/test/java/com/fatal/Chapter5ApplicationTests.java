@@ -23,7 +23,8 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Slf4j
-public class Chapter5ApplicationTests {
+public class Chapter5ApplicationTests
+{
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -39,54 +40,61 @@ public class Chapter5ApplicationTests {
     private TestRestTemplate template;
 
     @Before
-    public void before() throws Exception{
+    public void before() throws Exception
+    {
         this.url = "http://localhost:" + port + "/users";
         this.urlWithId = "http://localhost:" + port + "/users/{id}";
     }
 
     /**
-     *  postForEntity(String url, Object request, Class<T> responseType, Object... urlVariables)
-     *  String url ：请求路径
-     *  Object request ：参数
-     *  Class<T> responseType ：返回值类型
-     *  Object... urlVariables ：条件参数，对应请求路径上的占位符
+     * postForEntity(String url, Object request, Class<T> responseType, Object... urlVariables)
+     * String url ：请求路径
+     * Object request ：参数
+     * Class<T> responseType ：返回值类型
+     * Object... urlVariables ：条件参数，对应请求路径上的占位符
      */
     @Test
-    public void addUser() {
+    public void addUser()
+    {
         User user = new User().setUsername("米彩").setPassword("20");
         template.postForEntity(url, user, Integer.class);
         log.info("[添加用户成功]\n");
     }
 
     @Test
-    public void exchange() {
-        ResponseEntity<List<User>> responseEntity = template.exchange(url, HttpMethod.GET, null,
-                new ParameterizedTypeReference<List<User>>() {
-                });
+    public void exchange()
+    {
+        ResponseEntity<List<User>> responseEntity = template.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<User>>()
+        {
+        });
         log.info("[查询所有] - [{}]\n", responseEntity.getBody());
     }
 
     @Test
-    public void getForEntity() {
+    public void getForEntity()
+    {
         ResponseEntity<User> responseEntity = template.getForEntity(urlWithId, User.class, 1);
         log.info("[主键查询] - [{}]\n", responseEntity.getBody());
     }
 
     @Test
-    public void put() {
+    public void put()
+    {
         User user = new User().setUsername("米琪").setPassword("20");
         template.put(urlWithId, user, 1);
         log.info("[修改用户成功]\n");
     }
 
     @Test
-    public void delete() {
+    public void delete()
+    {
         template.delete(urlWithId, 2);
         log.info("[删除用户成功]");
     }
 
     @Test
-    public void dataSourceTest() {
+    public void dataSourceTest()
+    {
         DataSource dataSource = jdbcTemplate.getDataSource();
         Assert.assertTrue(dataSource instanceof HikariDataSource);
     }

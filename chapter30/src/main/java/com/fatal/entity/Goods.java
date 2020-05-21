@@ -13,10 +13,12 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-public class Goods {
+public class Goods
+{
 
     /**
      * 商品ID
+     *
      * @desc ID_WORKER: 分布式全局唯一ID 长整型类型
      */
     @TableId(type = IdType.ID_WORKER)

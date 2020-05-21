@@ -23,43 +23,54 @@ import java.lang.reflect.Method;
 @Component
 @Aspect
 @Order(1)
-public class LockAspect {
+public class LockAspect
+{
 
     private RedissonClient redisson;
 
-    public LockAspect(RedissonClient redisson) {
+    public LockAspect(RedissonClient redisson)
+    {
         this.redisson = redisson;
     }
 
     @Pointcut("@annotation(com.fatal.annotation.Lock)")
-    public void point() {}
+    public void point()
+    {
+    }
 
     @Around("point()")
-    public Object lock(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object lock(ProceedingJoinPoint joinPoint) throws Throwable
+    {
         Lock lock = getLock(joinPoint);
         // 目标方法参数
         Object[] args = joinPoint.getArgs();
         RLock fairLock = redisson.getFairLock(LockConstant.format(lock.name()));
         boolean isLock = fairLock.tryLock(lock.waitTime(), lock.leaseTime(), lock.unit());
-        if (isLock) {
-            try {
+        if (isLock)
+        {
+            try
+            {
                 return joinPoint.proceed(args);
-            } finally {
+            }
+            finally
+            {
                 fairLock.unlock();
             }
         }
         log.info("{}: 系统繁忙，请重试", Thread.currentThread().getName());
         // 这里为了方便查看日志，把下面一行注释掉了，实际还需要抛个异常就行
-//        throw new RuntimeException("系统繁忙，请重试");
+        //        throw new RuntimeException("系统繁忙，请重试");
         return null;
     }
 
     /**
      * 获取 Lock 注解
+     *
      * @param joinPoint
      * @return
      */
-    private Lock getLock(ProceedingJoinPoint joinPoint) {
+    private Lock getLock(ProceedingJoinPoint joinPoint)
+    {
         // 获得方法署名
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         // 获得目标方法

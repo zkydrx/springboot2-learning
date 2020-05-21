@@ -13,7 +13,8 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController
+{
 
     @Autowired
     private IUserService userService;
@@ -22,7 +23,8 @@ public class UserController {
      * 测试自带的查询功能
      */
     @GetMapping("/{id}")
-    public User fatal(@PathVariable Integer id) {
+    public User fatal(@PathVariable Integer id)
+    {
         User user = userService.selectById(id);
         return user;
     }
@@ -31,7 +33,8 @@ public class UserController {
      * 测试自定义sql
      */
     @GetMapping("/query/{name}")
-    public List<User> fatal(@PathVariable String name) {
+    public List<User> fatal(@PathVariable String name)
+    {
         List<User> users = userService.selectByName(name);
         return users;
     }

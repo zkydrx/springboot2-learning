@@ -12,20 +12,22 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class DirectSender {
+public class DirectSender
+{
 
     private RabbitTemplate rabbitTemplate;
 
     @Autowired
-    public DirectSender(RabbitTemplate rabbitTemplate) {
+    public DirectSender(RabbitTemplate rabbitTemplate)
+    {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void send() {
+    public void send()
+    {
         String message = "测试 DirectExchange";
         log.info("【DirectSender发布消息】 -- [{}]", message);
-        rabbitTemplate.convertAndSend(DirectRabbitConfig.DIRECT_EXCHANGE,
-                DirectRabbitConfig.ROUTING_KEY, message);
+        rabbitTemplate.convertAndSend(DirectRabbitConfig.DIRECT_EXCHANGE, DirectRabbitConfig.ROUTING_KEY, message);
     }
 
 }

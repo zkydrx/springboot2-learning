@@ -7,9 +7,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 // 开启定时任务
 @EnableScheduling
 @SpringBootApplication
-public class Chapter195Application {
+public class Chapter195Application
+{
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         SpringApplication.run(Chapter195Application.class, args);
     }
 

@@ -13,13 +13,15 @@ import java.time.LocalDateTime;
 
 /**
  * 全名 Stock Keeping Unit(库存量最小单位)，可以理解为有具体规格的商品。例如：40码白色帆布鞋。
+ *
  * @author Fatal
  * @date 2019/8/14 0014 17:15
  */
 @Data
 @Entity
 @Accessors(chain = true)
-public class Sku implements Serializable {
+public class Sku implements Serializable
+{
 
     /**
      * skuID

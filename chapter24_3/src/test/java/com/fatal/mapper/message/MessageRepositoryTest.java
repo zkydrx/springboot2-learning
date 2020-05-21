@@ -15,13 +15,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class MessageRepositoryTest {
+public class MessageRepositoryTest
+{
 
     @Autowired
     private MessageRepository repository;
 
     @Test
-    public void fun() {
+    public void fun()
+    {
         Message message = new Message().setContent("消息内容").setReceiver("接收器");
         Message save = repository.save(message);
         log.info("发送消息成功[order = {}]", save);

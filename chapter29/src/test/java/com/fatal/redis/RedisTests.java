@@ -19,7 +19,8 @@ import java.util.Set;
  * @author Fatal
  * @date 2019/8/16 0016 9:44
  */
-public class RedisTests extends Chapter29ApplicationTests {
+public class RedisTests extends Chapter29ApplicationTests
+{
 
     @Autowired
     private RedisTemplate<String, Serializable> redisTemplate;
@@ -29,28 +30,27 @@ public class RedisTests extends Chapter29ApplicationTests {
     private RedisTestDTO redisTestDTO;
 
     @Before
-    public void before() {
-        sku = new Sku()
-                .setGoodsId(111111L)
-                .setShopId(123457L)
-                .setShopName("MiCai Shop")
-                .setGoodsName("帆布鞋")
-                .setPrice(15000L)
-                .setStock(100)
-                .setPicture("http://...pic...123.png")
-                .setProperties("白色;40")
-                .setMax(300)
-                .setStatus(StatusEnums.NORMAL.getCode())
-                .setCreateTime(LocalDateTime.now())
-                .setUpdateTime(LocalDateTime.now());
+    public void before()
+    {
+        sku = new Sku().setGoodsId(111111L)
+                       .setShopId(123457L)
+                       .setShopName("MiCai Shop")
+                       .setGoodsName("帆布鞋")
+                       .setPrice(15000L)
+                       .setStock(100)
+                       .setPicture("http://...pic...123.png")
+                       .setProperties("白色;40")
+                       .setMax(300)
+                       .setStatus(StatusEnums.NORMAL.getCode())
+                       .setCreateTime(LocalDateTime.now())
+                       .setUpdateTime(LocalDateTime.now());
 
-        redisTestDTO = new RedisTestDTO()
-                .setSkuId(Long.MAX_VALUE)
-                .setCount(10000);
+        redisTestDTO = new RedisTestDTO().setSkuId(Long.MAX_VALUE).setCount(10000);
     }
 
     @Test
-    public void zsetTest() {
+    public void zsetTest()
+    {
         String key = "ZSET_TEST";
         ZSetOperations<String, Serializable> zSetOperations = redisTemplate.opsForZSet();
         zSetOperations.add(key, redisTestDTO, 1);   // skiplist
@@ -59,7 +59,8 @@ public class RedisTests extends Chapter29ApplicationTests {
     }
 
     @Test
-    public void hashTest() {
+    public void hashTest()
+    {
         HashOperations<String, Object, Object> hashOperations = redisTemplate.opsForHash();
         hashOperations.put("Cart", "用户id", sku);
         Sku result = (Sku) hashOperations.get("Cart", "用户id");
@@ -67,7 +68,8 @@ public class RedisTests extends Chapter29ApplicationTests {
     }
 
     @Test
-    public void stringTest() {
+    public void stringTest()
+    {
         ValueOperations<String, Serializable> valueOperations = redisTemplate.opsForValue();
         valueOperations.set("SKU", sku);
         Serializable sku = valueOperations.get("SKU");
@@ -75,7 +77,8 @@ public class RedisTests extends Chapter29ApplicationTests {
     }
 
     @Test
-    public void listTest() {
+    public void listTest()
+    {
         String key = "LIST_TEST";
         ListOperations<String, Serializable> listOperations = redisTemplate.opsForList();
         listOperations.leftPush(key, redisTestDTO);
@@ -84,9 +87,11 @@ public class RedisTests extends Chapter29ApplicationTests {
     }
 
     @Test
-    public void shopCartTest1() {
+    public void shopCartTest1()
+    {
         ArrayList<Sku> list = new ArrayList<>();
-        for (int i = 0; i < 120; i++) {
+        for (int i = 0; i < 120; i++)
+        {
             list.add(sku);
         }
         ValueOperations<String, Serializable> opsForValue = redisTemplate.opsForValue();

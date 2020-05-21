@@ -10,12 +10,14 @@ import java.util.Map;
 
 /**
  * RabbitMQ 配置类
+ *
  * @author: Fatal
  * @date: 2018/10/23 0023 11:23
  */
 @Slf4j
 @Configuration
-public class RabbitMQConfig {
+public class RabbitMQConfig
+{
 
     /**
      * 延迟相关名称
@@ -45,28 +47,31 @@ public class RabbitMQConfig {
      * 死信队列
      */
     @Bean
-    public Queue dlxQueue() {
+    public Queue dlxQueue()
+    {
         return new Queue(DEAD_LETTER_QUEUE_NAME);
     }
 
     /**
      * DLX（死信交换机）：dead letter发送到的exchange
+     *
      * @desc: 本质上是一个普通的交换机
      */
     @Bean
-    public DirectExchange dlxExchange() {
+    public DirectExchange dlxExchange()
+    {
         return new DirectExchange(DEAD_LETTER_EXCHANGE_NAME);
     }
 
     /**
      * 绑定组件
+     *
      * @desc: 将`死信队列`、`死信交换机（DLX）`、`DEAD_LETTER_ROUTING_KEY`路由键 三者绑定
      */
     @Bean
-    public Binding dlxBinding() {
-        return BindingBuilder.bind(dlxQueue())
-                .to(dlxExchange())
-                .with(DEAD_LETTER_ROUTING_KEY);
+    public Binding dlxBinding()
+    {
+        return BindingBuilder.bind(dlxQueue()).to(dlxExchange()).with(DEAD_LETTER_ROUTING_KEY);
     }
 
     // ************************   死信交换机相关配置(end)   ************************
@@ -75,17 +80,19 @@ public class RabbitMQConfig {
 
     /**
      * 延迟队列
+     *
      * @desc: 与`死信交换机`绑定，并指定`死信`携带的路由键
      */
     @Bean
-    public Queue delayQueue() {
+    public Queue delayQueue()
+    {
         Map<String, Object> configs = new HashMap<>();
         // `x-dead-letter-exchange` 关联`DLX（死信交换机）`
         configs.put(X_DEAD_LETTER_EXCHANGE, DEAD_LETTER_EXCHANGE_NAME);
         // `x-dead-letter-routing-key` 声明了死信在转发时携带的 routing-key。
         configs.put(X_DEAD_LETTER_ROUTING_KEY, DEAD_LETTER_ROUTING_KEY);
         // `x-message-ttl`设置该队列中消息的存活时间（队列属性设置，队列中所有消息都有相同的过期时间）
-//        configs.put(X_MESSAGE_TTL, 5 * 1000);
+        //        configs.put(X_MESSAGE_TTL, 5 * 1000);
         /**
          * @param durable 声明持久化队列，则为true。（该队列在服务器重启之后继续存在）
          * @param exclusive 如果声明独占队列，则该队列将仅由声明者的连接使用
@@ -99,19 +106,20 @@ public class RabbitMQConfig {
      * 延迟交换机
      */
     @Bean
-    public DirectExchange delayExchange() {
+    public DirectExchange delayExchange()
+    {
         return new DirectExchange(DELAY_EXCHANGE_NAME);
     }
 
     /**
      * 绑定组件
+     *
      * @desc: 将`延迟队列`、`延迟交换机`、`DELAY_ROUTING_KEY`路由键 三者绑定
      */
     @Bean
-    public Binding delayBinding() {
-        return BindingBuilder.bind(delayQueue())
-                .to(delayExchange())
-                .with(DELAY_ROUTING_KEY);
+    public Binding delayBinding()
+    {
+        return BindingBuilder.bind(delayQueue()).to(delayExchange()).with(DELAY_ROUTING_KEY);
     }
 
     // ************************   延迟交换机相关配置(end)   ************************

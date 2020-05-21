@@ -14,13 +14,15 @@ import java.time.LocalDateTime;
 
 /**
  * Book 控制器
+ *
  * @author: Fatal
  * @date: 2018/10/20 0020 9:46
  */
 @Slf4j
 @RestController
 @RequestMapping("/books")
-public class BookController {
+public class BookController
+{
 
     private RabbitTemplate rabbitTemplate;
 
@@ -30,7 +32,8 @@ public class BookController {
     private CorrelationData correlationData = new CorrelationData();
 
     @Autowired
-    public BookController(RabbitTemplate rabbitTemplate) {
+    public BookController(RabbitTemplate rabbitTemplate)
+    {
         this.rabbitTemplate = rabbitTemplate;
         correlationData.setId(RabbitMQConfig.CONFIRM_EXCHANGE);
     }
@@ -41,7 +44,8 @@ public class BookController {
      * 交换机和路由键都正确
      */
     @GetMapping("/1")
-    public void send1() {
+    public void send1()
+    {
         Book book = new Book().setId("1").setName("米彩");
         log.info("[发送时间] - [{}]", LocalDateTime.now());
         // 发送到confirmExchange交换机
@@ -54,20 +58,22 @@ public class BookController {
      * 交换机正确，路由键错误
      */
     @GetMapping("/2")
-    public void send2() {
+    public void send2()
+    {
         Book book = new Book().setId("1").setName("米彩");
         log.info("[发送时间] - [{}]", LocalDateTime.now());
-        this.rabbitTemplate.convertAndSend(RabbitMQConfig.CONFIRM_EXCHANGE,RabbitMQConfig.ROUTING_KEY + NO, book, correlationData);
+        this.rabbitTemplate.convertAndSend(RabbitMQConfig.CONFIRM_EXCHANGE, RabbitMQConfig.ROUTING_KEY + NO, book, correlationData);
     }
 
     /**
      * 交换机错误（不管路由键是否正确）
      */
     @GetMapping("/3")
-    public void send3() {
+    public void send3()
+    {
         Book book = new Book().setId("1").setName("米彩");
         log.info("[发送时间] - [{}]", LocalDateTime.now());
-//        this.rabbitTemplate.convertAndSend(RabbitMQConfig.CONFIRM_EXCHANGE + NO, RabbitMQConfig.ROUTING_KEY, book, correlationData);
+        //        this.rabbitTemplate.convertAndSend(RabbitMQConfig.CONFIRM_EXCHANGE + NO, RabbitMQConfig.ROUTING_KEY, book, correlationData);
         this.rabbitTemplate.convertAndSend(RabbitMQConfig.CONFIRM_EXCHANGE + NO, RabbitMQConfig.ROUTING_KEY + NO, book, correlationData);
     }
 

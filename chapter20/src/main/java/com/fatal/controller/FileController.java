@@ -15,41 +15,47 @@ import java.util.stream.Collectors;
 
 /**
  * 文件上传控制器
+ *
  * @author: Fatal
  * @date: 2018/10/25 0025 19:47
  */
 @Controller
-public class FileController {
+public class FileController
+{
 
     @Autowired
     private FileUtil fileUtil;
 
     @GetMapping("/")
-    public String index() {
+    public String index()
+    {
         return "upload";
     }
 
     @GetMapping("/uploadStatus")
-    public String uploadStatus() {
+    public String uploadStatus()
+    {
         return "uploadStatus";
     }
 
     @PostMapping("/upload")
-    public String fileUpload(@RequestParam("file") MultipartFile[] files,
-                                   RedirectAttributes redirectAttributes) {
-        if (files.length == 0) {
+    public String fileUpload(@RequestParam("file") MultipartFile[] files, RedirectAttributes redirectAttributes)
+    {
+        if (files.length == 0)
+        {
             redirectAttributes.addFlashAttribute("message", "Select at least one file to upload");
             return "redirect:uploadStatus";
         }
 
-        try {
+        try
+        {
             fileUtil.uploadFiles(files);
-            List<String> fileNames = Arrays.stream(files)
-                    .map(MultipartFile::getOriginalFilename)
-                    .collect(Collectors.toList());
+            List<String> fileNames = Arrays.stream(files).map(MultipartFile::getOriginalFilename).collect(Collectors.toList());
             redirectAttributes.addFlashAttribute("message", "Successful file uploaded");
             redirectAttributes.addFlashAttribute("files", fileNames);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
             throw new RuntimeException("uploaded fail");
         }

@@ -8,9 +8,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * springboot 已经在 ElasticsearchRepositoriesRegistrar 中帮我们加上了
  */
 @SpringBootApplication
-public class Chapter32Application {
+public class Chapter32Application
+{
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         SpringApplication.run(Chapter32Application.class, args);
     }
 

@@ -10,13 +10,15 @@ import javax.sql.DataSource;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Chapter7ApplicationTests {
+public class Chapter7ApplicationTests
+{
 
     @Autowired
     private DataSource dataSource;
 
     @Test
-    public void contextLoads() {
+    public void contextLoads()
+    {
         System.out.println(dataSource);
     }
 

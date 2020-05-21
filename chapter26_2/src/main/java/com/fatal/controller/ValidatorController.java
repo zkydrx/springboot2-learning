@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @date: 2018/11/28 0028 11:38
  */
 @RestController
-public class ValidatorController {
+public class ValidatorController
+{
 
     @GetMapping("/")
-    public String validate(@Validated Student student, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+    public String validate(@Validated Student student, BindingResult bindingResult)
+    {
+        if (bindingResult.hasErrors())
+        {
             return bindingResult.getFieldError().getDefaultMessage();
         }
 

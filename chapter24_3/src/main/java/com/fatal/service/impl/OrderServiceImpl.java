@@ -24,7 +24,8 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Service
-public class OrderServiceImpl implements IOrderService {
+public class OrderServiceImpl implements IOrderService
+{
 
     @Autowired
     private OrderRepository orderRepository;
@@ -40,10 +41,12 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Override
     @Transactional
-    public Order saveAndAsyncNoWithProxy(Order order) throws Exception {
+    public Order saveAndAsyncNoWithProxy(Order order) throws Exception
+    {
         Order save = orderRepository.save(order);
         // 推送消息
-        if (save != null) {
+        if (save != null)
+        {
             Future<Object> future = sendMessage(save);
             Object o = future.get(5000, TimeUnit.SECONDS);
             dealWithFuture(future);
@@ -57,11 +60,13 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Override
     @Transactional
-    public Order saveAndIdenticalClassAsyncWithProxy(Order order) throws Exception {
+    public Order saveAndIdenticalClassAsyncWithProxy(Order order) throws Exception
+    {
         Order save = orderRepository.save(order);
-//        int i = 1/0; // 测试事务
+        //        int i = 1/0; // 测试事务
         // 推送消息
-        if (save != null) {
+        if (save != null)
+        {
             // 获得当前代理对象
             OrderServiceImpl orderService = (OrderServiceImpl) AopContext.currentProxy();
             log.info("OrderServiceImpl代理对象为：[{}]", orderService.getClass());
@@ -79,11 +84,13 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Override
     @Transactional
-    public Order saveAndDifferentClassAsyncWithProxy(Order order) throws Exception {
+    public Order saveAndDifferentClassAsyncWithProxy(Order order) throws Exception
+    {
         Order save = orderRepository.save(order);
-//        int i = 1/0; // 测试事务
+        //        int i = 1/0; // 测试事务
         // 推送消息
-        if (save != null) {
+        if (save != null)
+        {
             // 调用异步方法获得调用结果，并对结果进行处理
             Future<Object> future = asyncComponent.sendMessage(save);
             dealWithFuture(future);
@@ -97,36 +104,46 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Async
     @Transactional
-    public Future<Object> sendMessage(Order order) {
+    public Future<Object> sendMessage(Order order)
+    {
         Future<Object> future = null;
         Long id = order.getId();
         String messageStr = "";
         String messageLog = "";
-        try {
-            if (id != null) {
+        try
+        {
+            if (id != null)
+            {
                 messageStr = "下单成功";
                 // 推送逻辑...
                 messageLog = "[ --> 消息发送成功]";
-            } else {
+            }
+            else
+            {
                 messageStr = "下单失败";
                 messageLog = "[ --> 消息发送失败]";
             }
             // 保存数据
             Message message = new Message().setContent(messageStr).setReceiver("接收器");
             Message save = messageRepository.save(message);
-//            int i = 1/0; // 测试异步事务
-            if (save != null && save.getId() != null) {
+            //            int i = 1/0; // 测试异步事务
+            if (save != null && save.getId() != null)
+            {
                 log.info("保存订单结果成功[message = {}]", save);
-            } else {
+            }
+            else
+            {
                 log.info("保存订单结果失败");
             }
             log.info(Thread.currentThread() + messageLog);
             future = new AsyncResult<>(Thread.currentThread().getName() + messageLog);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             future = new AsyncResult<>(new RuntimeException(e));
             // 异步方法出现异常后 --> 手动回滚
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            System.out.println("~~~~~~~~~~~~~~  " + Thread.currentThread().getName()+ " -- 异步方法抛异常啦    ~~~~~~~~~~~~~~");
+            System.out.println("~~~~~~~~~~~~~~  " + Thread.currentThread().getName() + " -- 异步方法抛异常啦    ~~~~~~~~~~~~~~");
             e.printStackTrace();
         }
         return future;
@@ -135,17 +152,21 @@ public class OrderServiceImpl implements IOrderService {
     /**
      * 异步结果出来
      */
-    private void dealWithFuture(Future future) throws Exception {
+    private void dealWithFuture(Future future) throws Exception
+    {
         Object o = future.get(5000, TimeUnit.SECONDS);
-        if (o instanceof Exception) {
+        if (o instanceof Exception)
+        {
             Exception e = (Exception) o;
-            System.out.println("~~~~~~~~~~~~~~  " + Thread.currentThread().getName()+ " -- 事务方法抛异常啦    ~~~~~~~~~~~~~~");
+            System.out.println("~~~~~~~~~~~~~~  " + Thread.currentThread().getName() + " -- 事务方法抛异常啦    ~~~~~~~~~~~~~~");
             e.printStackTrace();
             // 手动回滚
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             // 抛出 RuntimeException 让它自动回滚
-//            throw new RuntimeException(e);
-        } else if (o instanceof String){
+            //            throw new RuntimeException(e);
+        }
+        else if (o instanceof String)
+        {
             log.info("[异步方法成功返回] --> {}", o);
         }
     }

@@ -7,7 +7,8 @@ import lombok.Data;
  * @date: 2018/10/5 0005 17:55
  */
 @Data
-public class Account {
+public class Account
+{
 
     private Integer id;
     private String name;

@@ -19,7 +19,7 @@ spring:
     mongodb:
       # 默认uri`mongodb://localhost:27017/test`
       # 数据库有用户名和密码可参考：mongodb://name:password@localhost:27017/db
-#      uri: mongodb://fatal:123456@localhost:27017/test
+      #      uri: mongodb://fatal:123456@localhost:27017/test
       uri: mongodb://localhost:27017/test
       username: fatal
       password: 123456

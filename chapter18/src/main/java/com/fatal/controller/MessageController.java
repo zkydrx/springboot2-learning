@@ -11,13 +11,15 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * Message 控制器
+ *
  * @author: Fatal
  * @date: 2018/10/18 0018 16:07
  */
 @Slf4j
 @RestController
 @RequestMapping("/message")
-public class MessageController {
+public class MessageController
+{
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -26,7 +28,8 @@ public class MessageController {
     private CountDownLatch latch;
 
     @PostMapping("/sendRedisMessage")
-    public void sendRedisMessage(String message) throws InterruptedException {
+    public void sendRedisMessage(String message) throws InterruptedException
+    {
         log.info("【控制器 MessageController】：生产者发布了<" + message + ">");
         stringRedisTemplate.convertAndSend("config", message);
 

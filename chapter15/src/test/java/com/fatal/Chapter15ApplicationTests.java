@@ -10,7 +10,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Chapter15ApplicationTests {
+public class Chapter15ApplicationTests
+{
 
     @Autowired
     private CacheManager cacheManager;
@@ -19,7 +20,8 @@ public class Chapter15ApplicationTests {
     private ConcurrentMapCacheManager concurrentMapCacheManager;
 
     @Test
-    public void contextLoads() {
+    public void contextLoads()
+    {
         System.out.println(cacheManager);
         System.out.println(concurrentMapCacheManager);
     }

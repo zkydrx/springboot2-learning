@@ -17,7 +17,8 @@ import java.util.Date;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class ActionDaoTest {
+public class ActionDaoTest
+{
 
     @Autowired
     private ActionDao dao;
@@ -25,19 +26,16 @@ public class ActionDaoTest {
     private Action action;
 
     @Before
-    public void before() {
-        action = new Action()
-                .setObjectId(123456L)
-                .setActionType(ActionType.INSERT)
-                .setObjectClass("objectClass")
-                .setOperateTime(new Date())
-                .setOperator("fatal");
+    public void before()
+    {
+        action = new Action().setObjectId(123456L).setActionType(ActionType.INSERT).setObjectClass("objectClass").setOperateTime(new Date()).setOperator("fatal");
     }
 
     @Test
-    public void save() {
+    public void save()
+    {
         Action save = dao.save(action);
-        System.out.println("【Action新增成功】 -- [Action = " +  save +"]");
+        System.out.println("【Action新增成功】 -- [Action = " + save + "]");
     }
 
 }

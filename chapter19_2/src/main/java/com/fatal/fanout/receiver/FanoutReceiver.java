@@ -12,16 +12,20 @@ import java.time.LocalDateTime;
 
 /**
  * 接收者（订阅）
+ *
  * @author: Fatal
  * @date: 2018/10/22 0022 17:03
  */
 @Slf4j
 @Component
-public class FanoutReceiver {
+public class FanoutReceiver
+{
 
     @RabbitListener(queues = {FanoutRabbitConfig.FANOUT_A})
-    public void receiveMessageA(String messages, Message message, Channel channel) {
-        try {
+    public void receiveMessageA(String messages, Message message, Channel channel)
+    {
+        try
+        {
             log.info("【FanoutReceiverA接收到消息】 -- [{}]", messages);
             /**
              * @method void basicAck(long deliveryTag, boolean multiple) throws IOException
@@ -31,38 +35,54 @@ public class FanoutReceiver {
              *      false: 仅确认提供的传递标签指向的那条消息
              */
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             // TODO Ack失败的后续处理
             log.error("【Ack失败】 time = {}", LocalDateTime.now());
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             // TODO 业务异常的后续处理
             log.error("【消费失败，业务异常】 time = {}", LocalDateTime.now());
         }
     }
 
     @RabbitListener(queues = {FanoutRabbitConfig.FANOUT_B})
-    public void receiveMessageB(String messages, Message message, Channel channel) {
-        try {
+    public void receiveMessageB(String messages, Message message, Channel channel)
+    {
+        try
+        {
             log.info("【FanoutReceiverB接收到消息】 -- [{}]", messages);
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             // TODO Ack失败的后续处理
             log.error("【Ack失败】 time = {}", LocalDateTime.now());
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             // TODO 业务异常的后续处理
             log.error("【消费失败，业务异常】 time = {}", LocalDateTime.now());
         }
     }
 
     @RabbitListener(queues = {FanoutRabbitConfig.FANOUT_C})
-    public void receiveMessageC(String messages, Message message, Channel channel) {
-        try {
+    public void receiveMessageC(String messages, Message message, Channel channel)
+    {
+        try
+        {
             log.info("【FanoutReceiverC接收到消息】 -- [{}]", messages);
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             // TODO Ack失败的后续处理
             log.error("【Ack失败】 time = {}", LocalDateTime.now());
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             // TODO 业务异常的后续处理
             log.error("【消费失败，业务异常】 time = {}", LocalDateTime.now());
         }

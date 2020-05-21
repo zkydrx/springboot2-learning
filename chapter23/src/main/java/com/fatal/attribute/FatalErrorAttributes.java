@@ -8,21 +8,24 @@ import java.util.Map;
 
 /**
  * 自定义 ErrorAttributes
+ *
  * @author: Fatal
  * @date: 2018/10/30 0030 15:12
  */
 @Component
-public class FatalErrorAttributes extends DefaultErrorAttributes {
+public class FatalErrorAttributes extends DefaultErrorAttributes
+{
 
     /**
      * 这个方法有点像代理
-     * @param webRequest ：接收异常处理方法中的request
+     *
+     * @param webRequest        ：接收异常处理方法中的request
      * @param includeStackTrace
      * @return
      */
     @Override
-    public Map<String, Object> getErrorAttributes(WebRequest webRequest,
-                                                  boolean includeStackTrace) {
+    public Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace)
+    {
         /**
          * 这个map就是最后返回的数据，如果你想改格式，改这个map即可
          */

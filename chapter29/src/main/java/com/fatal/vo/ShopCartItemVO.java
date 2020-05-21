@@ -10,12 +10,14 @@ import java.util.stream.Collectors;
 
 /**
  * 购物车skuVO，去掉了重复的属性
+ *
  * @author Fatal
  * @date 2019/8/15 0015 17:45
  */
 @Data
 @Accessors(chain = true)
-public class ShopCartItemVO {
+public class ShopCartItemVO
+{
 
     private Long id;
 
@@ -59,16 +61,16 @@ public class ShopCartItemVO {
      */
     private Integer status;
 
-    private static ShopCartItemVO of(ShopCartItemDTO shopCartItemDTO) {
+    private static ShopCartItemVO of(ShopCartItemDTO shopCartItemDTO)
+    {
         ShopCartItemVO shopCartItemVO = new ShopCartItemVO();
         BeanUtils.copyProperties(shopCartItemDTO, shopCartItemVO);
         return shopCartItemVO;
     }
 
-    public static List<ShopCartItemVO> of(List<ShopCartItemDTO> shopCartItemDTOs) {
-        return shopCartItemDTOs.stream()
-                .map(ShopCartItemVO::of)
-                .collect(Collectors.toList());
+    public static List<ShopCartItemVO> of(List<ShopCartItemDTO> shopCartItemDTOs)
+    {
+        return shopCartItemDTOs.stream().map(ShopCartItemVO::of).collect(Collectors.toList());
     }
 
 }

@@ -15,7 +15,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class OrderRepositoryTest {
+public class OrderRepositoryTest
+{
 
     @Autowired
     private OrderRepository repository;
@@ -24,11 +25,9 @@ public class OrderRepositoryTest {
      * 测试整合 spring data jpa
      */
     @Test
-    public void save() {
-        Order order = new Order().setOrderId("ORDER_123456")
-                .setUserId("USER_123456")
-                .setAmount(100000l)
-                .setPhone("137504123456");
+    public void save()
+    {
+        Order order = new Order().setOrderId("ORDER_123456").setUserId("USER_123456").setAmount(100000l).setPhone("137504123456");
         Order save = repository.save(order);
         log.info("新增订单成功[order = {}]", save);
     }

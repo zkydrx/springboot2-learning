@@ -15,17 +15,16 @@ import java.util.List;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class UserMapperTest {
+public class UserMapperTest
+{
 
     @Autowired
     private IUserMapper userMapper;
 
     @Test
-    public void lambdaQueryTest() {
-        List<User> users = userMapper.createLambdaQuery()
-                .andEq(User::getName, "fatal")
-                .andEq(User::getPassword, "123456")
-                .select();
+    public void lambdaQueryTest()
+    {
+        List<User> users = userMapper.createLambdaQuery().andEq(User::getName, "fatal").andEq(User::getPassword, "123456").select();
         System.out.println(users);
     }
 

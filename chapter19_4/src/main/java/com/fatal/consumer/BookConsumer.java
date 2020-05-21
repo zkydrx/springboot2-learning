@@ -13,22 +13,30 @@ import java.time.LocalDateTime;
 
 /**
  * Book 消费者
+ *
  * @author: Fatal
  * @date: 2018/10/23 0023 14:16
  */
 @Slf4j
 @Component
-public class BookConsumer {
+public class BookConsumer
+{
 
     @RabbitListener(queues = RabbitMQConfig.DEAD_LETTER_QUEUE_NAME)
-    public void listenerDelayQueue(Book book, Message message, Channel channel) {
+    public void listenerDelayQueue(Book book, Message message, Channel channel)
+    {
         log.info("[listenerDelayQueue 消费消息] - [消费时间] - [{}] - [{}]", LocalDateTime.now(), book);
-        try {
+        try
+        {
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             // TODO Ack失败的后续处理
             log.error("【Ack失败】 time = {}", LocalDateTime.now());
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             // TODO 业务异常的后续处理
             log.error("【消费失败，业务异常】 time = {}", LocalDateTime.now());
         }

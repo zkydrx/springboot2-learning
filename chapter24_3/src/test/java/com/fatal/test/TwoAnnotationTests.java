@@ -19,7 +19,8 @@ import java.util.concurrent.Future;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class TwoAnnotationTests {
+public class TwoAnnotationTests
+{
 
     @Autowired
     private Demo1 demo1;
@@ -33,9 +34,9 @@ public class TwoAnnotationTests {
     private Message message;
 
     @Before
-    public void before() {
-        message = new Message().setContent("content_test1")
-                .setReceiver("receiver_123456");
+    public void before()
+    {
+        message = new Message().setContent("content_test1").setReceiver("receiver_123456");
     }
 
     /**
@@ -45,7 +46,8 @@ public class TwoAnnotationTests {
      * 用现有的，没有的话则新开一个事务
      */
     @Test
-    public void fun() {
+    public void fun()
+    {
         demo1.test1(message);
     }
 
@@ -54,7 +56,8 @@ public class TwoAnnotationTests {
      * 结果：事务方法不起左右，报错没有回滚
      */
     @Test
-    public void fun2() throws Exception {
+    public void fun2() throws Exception
+    {
         Future<Message> messageFuture = demo2.test1(message);
         System.out.println(messageFuture.get());
     }
@@ -64,7 +67,8 @@ public class TwoAnnotationTests {
      * 结果：第二个@Async失去作用
      */
     @Test
-    public void fun3() throws Exception {
+    public void fun3() throws Exception
+    {
         Future<Message> messageFuture = demo3.test1(message);
         System.out.println(messageFuture.get());
     }

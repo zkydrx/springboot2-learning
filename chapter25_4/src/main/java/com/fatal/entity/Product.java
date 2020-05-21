@@ -11,13 +11,15 @@ import java.util.Date;
 
 /**
  * Produt 实体
+ *
  * @author: Fatal
  * @date: 2018/11/15 0015 10:56
  */
 @Data
 @Entity
 @Accessors(chain = true)
-public class Product {
+public class Product
+{
 
     @Id
     @GeneratedValue

@@ -16,7 +16,8 @@ import java.util.Random;
  * @author Fatal
  * @date 2019/8/22 0022 10:29
  */
-public class IHotSearchServiceTest extends Chapter30ApplicationTests {
+public class IHotSearchServiceTest extends Chapter30ApplicationTests
+{
 
     @Autowired
     private IHotSearchService hotSearchService;
@@ -28,7 +29,8 @@ public class IHotSearchServiceTest extends Chapter30ApplicationTests {
     private RedisTemplate<String, Serializable> redisTemplate;
 
     @Test
-    public void init() {
+    public void init()
+    {
         BoundZSetOperations<String, Serializable> zSetOperations = redisTemplate.boundZSetOps(HotSearchConstant.HOT_SEARCH);
         Random random = new Random();
         List<Long> ids = goodsService.getIds();
@@ -39,18 +41,21 @@ public class IHotSearchServiceTest extends Chapter30ApplicationTests {
     }
 
     @Test
-    public void incrementTest() {
+    public void incrementTest()
+    {
         hotSearchService.increment(1164345124273057799L);
     }
 
     @Test
-    public void hotSearchListTest() {
+    public void hotSearchListTest()
+    {
         List<Long> ids = hotSearchService.hotSearchList();
         ids.forEach(System.out::println);
     }
 
     @Test
-    public void hotSearchWithScoreListTest() {
+    public void hotSearchWithScoreListTest()
+    {
         Map<Serializable, Double> map = hotSearchService.hotSearchWithScoreList();
         map.entrySet().forEach(System.out::println);
     }

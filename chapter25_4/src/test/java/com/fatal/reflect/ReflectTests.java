@@ -19,10 +19,12 @@ import java.util.stream.Collectors;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ReflectTests {
+public class ReflectTests
+{
 
     @Test
-    public void getBeanInfo() {
+    public void getBeanInfo()
+    {
         Zi zi = new Zi();
         zi.setZiName("zi");
         zi.setZiAge(18);
@@ -33,15 +35,17 @@ public class ReflectTests {
         /*
          * 实体属性值映射（这里没有考虑复杂类型，需要的话自行调整）
          */
-        Map<String, Object> map = fields.stream()
-                .collect(Collectors.toMap(Function.identity(), field -> {
-                    try {
-                        Method method = ziClass.getMethod("get" + field.substring(0, 1).toUpperCase() + field.substring(1));
-                        return method.invoke(zi);
-                    } catch (Exception e) {
-                        throw new RuntimeException();
-                    }
-                }));
+        Map<String, Object> map = fields.stream().collect(Collectors.toMap(Function.identity(), field -> {
+            try
+            {
+                Method method = ziClass.getMethod("get" + field.substring(0, 1).toUpperCase() + field.substring(1));
+                return method.invoke(zi);
+            }
+            catch (Exception e)
+            {
+                throw new RuntimeException();
+            }
+        }));
         map.entrySet().forEach(System.out::println);
     }
 

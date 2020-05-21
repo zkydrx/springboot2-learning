@@ -12,13 +12,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * 测试 @Transactional
+ *
  * @author: Fatal
  * @date: 2018/11/2 0002 10:30
  */
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class TransactionalTests {
+public class TransactionalTests
+{
 
     @Autowired
     private IOrderService orderService;
@@ -26,11 +28,9 @@ public class TransactionalTests {
     private Order order;
 
     @Before
-    public void before() {
-        order = new Order().setOrderId("ORDER_123456")
-                .setUserId("USER_123456")
-                .setAmount(100000l)
-                .setPhone("137504123456");
+    public void before()
+    {
+        order = new Order().setOrderId("ORDER_123456").setUserId("USER_123456").setAmount(100000l).setPhone("137504123456");
     }
 
     /**
@@ -38,7 +38,8 @@ public class TransactionalTests {
      * 注掉 int i = 1/0;
      */
     @Test
-    public void saveAndAsyncNoWithProxy() throws Exception {
+    public void saveAndAsyncNoWithProxy() throws Exception
+    {
         Order save = orderService.saveAndAsyncNoWithProxy(order);
         log.info("新增订单成功[order = {}]", save);
     }
@@ -49,7 +50,8 @@ public class TransactionalTests {
      * 测试2：打开 int i = 1/0; 测试 @Transactionl + @Async 异步事务
      */
     @Test
-    public void saveAndIdenticalClassAsyncWithProxy() throws Exception {
+    public void saveAndIdenticalClassAsyncWithProxy() throws Exception
+    {
         Order save = orderService.saveAndIdenticalClassAsyncWithProxy(order);
         log.info("新增订单成功[order = {}]", save);
     }
@@ -60,7 +62,8 @@ public class TransactionalTests {
      * 测试2：打开 int i = 1/0; 测试 @Transactionl + @Async 异步事务
      */
     @Test
-    public void saveAndDifferentClassAsyncWithProxy() throws Exception {
+    public void saveAndDifferentClassAsyncWithProxy() throws Exception
+    {
         Order save = orderService.saveAndDifferentClassAsyncWithProxy(order);
         log.info("新增订单成功[order = {}]", save);
     }

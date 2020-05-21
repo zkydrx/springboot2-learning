@@ -18,7 +18,8 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(indexName = "city", type = "city_search", replicas = 0)
-public class City {
+public class City
+{
 
     @Id
     private String id;

@@ -16,17 +16,20 @@ import javax.sql.DataSource;
 
 /**
  * BeetlSql配置类
+ *
  * @author: Fatal
  * @date: 2018/10/4 0004 13:01
  */
 @Configuration
-public class BeetlSqlConfig {
+public class BeetlSqlConfig
+{
 
     /**
      * Mapper 接口扫描配置
      */
     @Bean
-    public BeetlSqlScannerConfigurer beetlSqlScannerConfigurer() {
+    public BeetlSqlScannerConfigurer beetlSqlScannerConfigurer()
+    {
         BeetlSqlScannerConfigurer conf = new BeetlSqlScannerConfigurer();
         conf.setBasePackage("com.fatal.mapper");
         conf.setDaoSuffix("Mapper");
@@ -36,7 +39,8 @@ public class BeetlSqlConfig {
 
     @Bean
     @Primary
-    public SqlManagerFactoryBean sqlManagerFactoryBean(@Qualifier("dataSource") DataSource datasource) {
+    public SqlManagerFactoryBean sqlManagerFactoryBean(@Qualifier("dataSource") DataSource datasource)
+    {
         SqlManagerFactoryBean factory = new SqlManagerFactoryBean();
         BeetlSqlDataSource source = new BeetlSqlDataSource();
         source.setMasterSource(datasource);
@@ -47,7 +51,7 @@ public class BeetlSqlConfig {
         // 开启驼峰
         factory.setNc(new UnderlinedNameConversion());
         // sql文件路径
-//        factory.setSqlLoader(new ClasspathLoader("/sql")); // 默认就是放在 /resources/sql下
+        //        factory.setSqlLoader(new ClasspathLoader("/sql")); // 默认就是放在 /resources/sql下
         return factory;
     }
 

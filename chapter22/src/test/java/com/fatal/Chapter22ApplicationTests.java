@@ -15,7 +15,8 @@ import java.io.File;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Chapter22ApplicationTests {
+public class Chapter22ApplicationTests
+{
 
     @Autowired
     private JavaMailSender mailSender;
@@ -25,7 +26,8 @@ public class Chapter22ApplicationTests {
     private static String PATHNAME = "E:/Pictures/桌面壁纸/娜美.png";
 
     @Test
-    public void sendSimpleMail() {
+    public void sendSimpleMail()
+    {
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
 
@@ -38,7 +40,8 @@ public class Chapter22ApplicationTests {
     }
 
     @Test
-    public void sendAttachmentsMail() throws Exception {
+    public void sendAttachmentsMail() throws Exception
+    {
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
 
